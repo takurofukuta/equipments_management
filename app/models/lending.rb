@@ -1,0 +1,2 @@
+class Lending < ApplicationRecord
+end
