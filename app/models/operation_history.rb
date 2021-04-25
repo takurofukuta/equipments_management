@@ -1,0 +1,2 @@
+class OperationHistory < ApplicationRecord
+end
