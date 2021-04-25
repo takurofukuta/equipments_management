@@ -25,6 +25,10 @@ ja:
         unconfirmed_email: 未確認Eメール
         unlock_token: ロック解除用トークン
         updated_at: 更新日
+        user_name: ユーザー名
+        last_name: 苗字
+        first_name: 名前
+        assignment_year: 研究室配属年度
     models:
       user: ユーザー
   devise:
