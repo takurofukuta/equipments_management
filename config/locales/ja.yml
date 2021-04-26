@@ -5,3 +5,5 @@ ja:
     attributes:
       equipment:
         genre: 備品ジャンル
+      operation_history:
+        content: 操作履歴

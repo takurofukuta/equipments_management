@@ -8,3 +8,8 @@ ja:
         camera: "カメラ類"
         experiment: "実験機器"
         others: "その他"
+    operation_history:
+      content:
+        add_data: "追加しました"
+        edit_data: "編集しました"
+        delete_data: "削除しました"
