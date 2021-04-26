@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'operation_histories/index'
   get 'lendings/index'
   get 'lendings/history'
   get 'equipments/index'
