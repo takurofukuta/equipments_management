@@ -1,2 +1,30 @@
 <h1>Equipments#index</h1>
-<p>Find me in app/views/equipments/index.html.erb</p>
+
+<table border = "1">
+  <thead>
+    <tr>
+      <th scope = "col">備品ジャンル</th>
+      <th scope = "col">研究室用備品名</th>
+      <th scope = "col">メーカー名</th>
+      <th scope = "col">製品名</th>
+      <th scope = "col">購入年度</th>
+      <th scope = "col">資産番号</th>
+      <th scope = "col">ステータス</th>
+      <th scope = "col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @equipments.each do |equipment| %>
+      <tr>
+        <td><%= equipment.genre %></td>
+        <td><%= equipment.lab_equipment_name %></td>
+        <td><%= equipment.maker_name %></td>
+        <td><%= equipment.product_name %></td>
+        <td><%= equipment.purchase_year %></td>
+        <td><%= equipment.asset_num %></td>
+        <td>返却済 / 廃棄済</td>
+        <td>詳細 編集 貸出</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
