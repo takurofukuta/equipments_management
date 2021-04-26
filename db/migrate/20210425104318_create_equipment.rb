@@ -11,7 +11,7 @@ class CreateEquipment < ActiveRecord::Migration[6.1]
       t.integer :lendings_status, null: false, default: 0
       t.integer :disposal_status, null: false, default: 0
       t.text :remarks
-      t.references :registered_user, foreign_key: true, null: false
+      t.references :registered_user, null: false, foreign_key: { to_table: :users }
       t.timestamps
     end
   end

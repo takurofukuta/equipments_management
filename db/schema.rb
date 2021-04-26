@@ -10,26 +10,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_25_093237) do
+ActiveRecord::Schema.define(version: 2021_04_25_104418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "equipment", force: :cascade do |t|
+    t.integer "genre", null: false
+    t.string "lab_equipment_name", null: false
+    t.string "maker_name", null: false
+    t.string "product_name", null: false
+    t.integer "purchase_year", null: false
+    t.string "asset_num"
+    t.integer "price"
+    t.integer "lendings_status", default: 0, null: false
+    t.integer "disposal_status", default: 0, null: false
+    t.text "remarks"
+    t.bigint "registered_user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["registered_user_id"], name: "index_equipment_on_registered_user_id"
+  end
+
+  create_table "lendings", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "operation_histories", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "user_name"
-    t.string "last_name"
-    t.string "first_name"
-    t.integer "assignment_year"
+    t.string "user_name", null: false
+    t.string "last_name", null: false
+    t.string "first_name", null: false
+    t.integer "assignment_year", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "admin", default: false
-    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "equipment", "users", column: "registered_user_id"
 end
