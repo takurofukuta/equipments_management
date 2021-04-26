@@ -1,5 +1,8 @@
 class User < ApplicationRecord
   has_many :equipments
+  has_many :lendings
+  has_many :operation_histories
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :authentication_keys => [:user_name]
 
