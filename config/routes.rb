@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'lendings/index'
+  get 'lendings/history'
   get 'equipments/index'
   get 'equipments/edit'
   get 'equipments/show'
