@@ -1,0 +1,7 @@
+ja:
+  activerecord:
+    models:
+      equipment: 備品
+    attributes:
+      equipment:
+        genre: 備品ジャンル
