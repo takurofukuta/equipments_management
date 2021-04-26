@@ -88,6 +88,8 @@ GEM
       warden (~> 1.2.3)
     devise-i18n (1.9.3)
       devise (>= 4.7.1)
+    enum_help (0.0.17)
+      activesupport (>= 3.0.0)
     erubi (1.10.0)
     ffi (1.15.0)
     globalid (0.4.2)
@@ -230,6 +232,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   devise
   devise-i18n
+  enum_help
   jbuilder (~> 2.7)
   listen (~> 3.3)
   pg (~> 1.1)
