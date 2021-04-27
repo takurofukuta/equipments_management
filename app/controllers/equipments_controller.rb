@@ -13,7 +13,6 @@ class EquipmentsController < ApplicationController
   end
 
   def create
-    binding.pry
     current_user.equipments.create!(equipment_params)
     redirect_to root_path
   end
