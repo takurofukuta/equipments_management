@@ -13,6 +13,9 @@ class EquipmentsController < ApplicationController
   end
 
   def create
+    binding.pry
+    current_user.equipments.create!(equipment_params)
+    redirect_to root_path
   end
 
   def update
@@ -25,5 +28,22 @@ class EquipmentsController < ApplicationController
     equipment = Equipment.find(params[:id])
     equipment.destroy!
     redirect_to root_path
+  end
+
+  private
+
+  def equipment_params
+    params.require(:equipment).permit(
+      :genre,
+      :lab_equipment_name,
+      :maker_name,
+      :product_name,
+      :purchase_year,
+      :asset_num,
+      :price,
+      :lendings_status,
+      :disposal_status,
+      :remarks
+    )
   end
 end

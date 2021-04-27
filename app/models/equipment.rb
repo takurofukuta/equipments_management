@@ -1,6 +1,6 @@
 class Equipment < ApplicationRecord
   has_one :lending, dependent: :destroy
-  belongs_to :registered_user, optional: true, class_name: "User"
+  belongs_to :user, foreign_key: :registered_user_id
 
   validates :genre, presence: true
   validates :lab_equipment_name, presence: true
