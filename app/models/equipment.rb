@@ -1,5 +1,5 @@
 class Equipment < ApplicationRecord
-  has_one :lending, dependent: :destroy
+  has_one :lending, class_name: "Lending"
   belongs_to :registered_user, class_name: "User", foreign_key: :registered_user_id
 
   validates :genre, presence: true

@@ -10,3 +10,4 @@
   <p>備考：<%= f.text_field :remarks %></p>
   <%= f.submit "更新" %>
 <% end %>
+  <%= link_to "削除", @equipment, method: :delete, data: { confirm: "削除しますか?" } %>
