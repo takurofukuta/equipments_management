@@ -1,4 +1,5 @@
 class EquipmentsController < ApplicationController
+  before_action :authenticate_user!
   def index
     @equipments = Equipment.all
     @equipment = Equipment.new
