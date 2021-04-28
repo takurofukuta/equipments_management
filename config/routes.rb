@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   post "/lendings/:id", to: "lendings#lending"
   patch "/lendings/:id", to: "lendings#return"
   get "/lendings/history", to: "lendings#lendings_history"
-
+  get "operation_history/", to: "operation_histories#index"
   devise_for :users
 end

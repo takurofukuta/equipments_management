@@ -15,7 +15,8 @@
       <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
       <%= link_to "備品データ一覧", equipments_path %>
       <%= link_to "貸出状況", lendings_path %>
-      <%= link_to "貸出履歴", '/lendings/history' %>
+      <%= link_to "貸出履歴", lendings_history_path %>
+      <%= link_to "操作履歴", operation_history_path %>
 
       現在のアカウント:
       <%= current_user.user_name %>
