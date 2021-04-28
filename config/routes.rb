@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  root to: "equipments#index"
+  resources :equipments, expect: :new
+  get "/lendings", to: "lendings#index"
+  post "/lendings/:id", to: "lendings#lending"
+  patch "/lendings/:id", to: "lendings#return"
+  get "/lendings/history", to: "lendings#lendings_history"
+  get "operation_history/", to: "operation_histories#index"
   devise_for :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

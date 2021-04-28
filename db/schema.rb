@@ -26,20 +26,29 @@ ActiveRecord::Schema.define(version: 2021_04_25_104418) do
     t.integer "lendings_status", default: 0, null: false
     t.integer "disposal_status", default: 0, null: false
     t.text "remarks"
-    t.bigint "registered_user_id", null: false
+    t.integer "registered_user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["registered_user_id"], name: "index_equipment_on_registered_user_id"
   end
 
   create_table "lendings", force: :cascade do |t|
+    t.integer "lending_user_id", null: false
+    t.integer "borrowed_equipment_id", null: false
+    t.integer "lendings_status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["borrowed_equipment_id"], name: "index_lendings_on_borrowed_equipment_id"
+    t.index ["lending_user_id"], name: "index_lendings_on_lending_user_id"
   end
 
   create_table "operation_histories", force: :cascade do |t|
+    t.integer "content", null: false
+    t.string "lab_equipment_name", null: false
+    t.integer "operated_user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["operated_user_id"], name: "index_operation_histories_on_operated_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -58,4 +67,7 @@ ActiveRecord::Schema.define(version: 2021_04_25_104418) do
   end
 
   add_foreign_key "equipment", "users", column: "registered_user_id"
+  add_foreign_key "lendings", "equipment", column: "borrowed_equipment_id"
+  add_foreign_key "lendings", "users", column: "lending_user_id"
+  add_foreign_key "operation_histories", "users", column: "operated_user_id"
 end

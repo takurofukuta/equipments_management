@@ -1,0 +1,53 @@
+<h1>Equipments#index</h1>
+
+<p>備品データの追加</p>
+<%= form_with model: @equipment, url: equipments_path, method: :post, local: true do |f| %>
+  <p>備品ジャンル：<%= f.text_field :genre %></p>
+  <p>研究室用備品名：<%= f.text_field :lab_equipment_name %></p>
+  <p>メーカー名：<%= f.text_field :maker_name %></p>
+  <p>製品名：<%= f.text_field :product_name %></p>
+  <p>購入年度：<%= f.text_field :purchase_year %></p>
+  <p>資産番号：<%= f.text_field :asset_num %></p>
+  <p>金額：<%= f.text_field :price %></p>
+  <p>備考：<%= f.text_field :remarks %></p>
+  <%= f.submit "送信" %>
+<% end %>
+
+<table border = "1">
+  <thead>
+    <tr>
+      <th scope = "col">備品ジャンル</th>
+      <th scope = "col">研究室用備品名</th>
+      <th scope = "col">メーカー名</th>
+      <th scope = "col">製品名</th>
+      <th scope = "col">購入年度</th>
+      <th scope = "col">資産番号</th>
+      <th scope = "col">ステータス</th>
+      <th scope = "col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @equipments.each do |equipment| %>
+      <tr>
+        <td><%= equipment.genre %></td>
+        <td><%= equipment.lab_equipment_name %></td>
+        <td><%= equipment.maker_name %></td>
+        <td><%= equipment.product_name %></td>
+        <td><%= equipment.purchase_year %></td>
+        <td><%= equipment.asset_num %></td>
+        <td>返却済 / 廃棄済</td>
+        <td>
+        <%= link_to "詳細", equipment_path(equipment) %>
+        <%= link_to "編集", edit_equipment_path(equipment) %>
+
+        <% if equipment.lendings_status == 0 %>
+          <%= link_to "貸出", {controller: "lendings", action: "lending", id: equipment.id}, method: :post %>
+        <% elsif equipment.lendings_status == 1 %>
+          貸出中
+        <% end %>
+
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

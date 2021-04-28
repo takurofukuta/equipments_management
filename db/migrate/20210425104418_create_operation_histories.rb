@@ -3,8 +3,9 @@ class CreateOperationHistories < ActiveRecord::Migration[6.1]
     create_table :operation_histories do |t|
       t.integer :content, null: false
       t.string :lab_equipment_name, null: false
-      t.references :operated_user, null: false, foreign_key: { to_table: :users }
+      t.integer :operated_user_id, null: false, index: true
       t.timestamps
     end
+    add_foreign_key :operation_histories, :users, column: :operated_user_id
   end
 end

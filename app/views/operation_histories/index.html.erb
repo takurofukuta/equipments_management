@@ -1,0 +1,19 @@
+<p>操作履歴一覧</p>
+<table border="1">
+  <thead>
+    <tr>
+      <th scope="col">操作したユーザー</th>
+      <th scope="col">操作内容</th>
+      <th scope="col">操作した日時</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @operation_histories.each do |operation_history| %>
+      <tr>
+        <td><%= operation_history.operated_user.user_name %></td>
+        <td><%= operation_history.lab_equipment_name %>を<%= operation_history.content_i18n %></td>
+        <td><%= operation_history.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
