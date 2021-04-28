@@ -1,2 +1,35 @@
-<h1>Lendings#history</h1>
-<p>Find me in app/views/lendings/history.html.erb</p>
+<p>貸出備品一覧</p>
+<table border="1">
+  <thead>
+    <tr>
+      <th scope="col">研究室用備品名</th>
+      <th scope="col">メーカー名</th>
+      <th scope="col">製品名</th>
+      <th scope="col">購入年度</th>
+      <th scope="col">資産番号</th>
+      <th scope="col">借りてる人</th>
+      <th scope="col">借りた日</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @lendings.each do |lending| %>
+      <tr>
+        <td><%= lending.borrowed_equipment.lab_equipment_name %></td>
+        <td><%= lending.borrowed_equipment.maker_name %></td>
+        <td><%= lending.borrowed_equipment.product_name %></td>
+        <td><%= lending.borrowed_equipment.purchase_year %></td>
+        <td><%= lending.borrowed_equipment.asset_num %></td>
+        <td>
+          <%= lending.lending_user.last_name %>
+          <%= lending.lending_user.first_name %>
+          (<%= lending.lending_user.user_name %>)
+        </td>
+        <td><%= lending.created_at %></td>
+        <td>
+          <%= link_to "詳細", equipment_path(lending.borrowed_equipment) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -2,6 +2,10 @@ class LendingsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @lendings = Lending.where(lendings_status: 1)
+  end
+
+  def lendings_history
     @lendings = Lending.all
   end
 
@@ -26,8 +30,5 @@ class LendingsController < ApplicationController
     equipment.save
 
     redirect_to lendings_path
-  end
-
-  def lendings_history
   end
 end
