@@ -1,5 +1,5 @@
 class OperationHistory < ApplicationRecord
-  belongs_to :user, foreign_key: :operated_user_id
+  belongs_to :user, class_name: "User", foreign_key: :operated_user_id
 
   enum content: {
     add_data: 0,

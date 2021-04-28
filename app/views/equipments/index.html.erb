@@ -36,7 +36,10 @@
         <td><%= equipment.purchase_year %></td>
         <td><%= equipment.asset_num %></td>
         <td>返却済 / 廃棄済</td>
-        <td>詳細 編集 貸出</td>
+        <td>
+        <%= link_to "詳細", equipment_path(equipment) %>
+        <%= link_to "編集", edit_equipment_path(equipment) %>
+        貸出</td>
       </tr>
     <% end %>
   </tbody>

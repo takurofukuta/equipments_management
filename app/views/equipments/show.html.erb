@@ -1,2 +1,22 @@
-<h1>Equipments#show</h1>
-<p>Find me in app/views/equipments/show.html.erb</p>
+<h1>備品データ詳細</h1>
+<p> 備品ジャンル:<%= @equipment.genre %></p>
+<p> 研究室用備品名:<%= @equipment.lab_equipment_name %></p>
+<p> メーカー名:<%= @equipment.maker_name %></p>
+<p> 製品名:<%= @equipment.product_name %></p>
+<p> 購入年度:<%= @equipment.purchase_year %></p>
+<p> 資産番号:<%= @equipment.asset_num %></p>
+<p> 値段:<%= @equipment.price %></p>
+
+<% if @equipment.disposal_status == 0 %>
+<p>未廃棄</p>
+<% elsif @equipment.disposal_status == 1 %>
+<p>廃棄済み</p>
+<% end %>
+
+<p> 備考:<%= @equipment.remarks %></p>
+<p> データ作成者:<%= @equipment.registered_user.user_name %>（<%= @equipment.registered_user.last_name %><%= @equipment.registered_user.first_name %>）</p>
+<p> データ作成日時:<%= @equipment.created_at %></p>
+<p> データ更新日時:<%= @equipment.updated_at %></p>
+
+<%= link_to "編集", edit_equipment_path(@equipment) %>
+<%= link_to "削除", @equipment, method: :delete, data: { confirm: "削除しますか?" } %>

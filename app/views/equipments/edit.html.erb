@@ -1,2 +1,12 @@
-<h1>Equipments#edit</h1>
-<p>Find me in app/views/equipments/edit.html.erb</p>
+<p>備品データの編集</p>
+<%= form_with model: @equipment, url: equipment_path, method: :patch, local: true do |f| %>
+  <p>備品ジャンル：<%= f.text_field :genre %></p>
+  <p>研究室用備品名：<%= f.text_field :lab_equipment_name %></p>
+  <p>メーカー名：<%= f.text_field :maker_name %></p>
+  <p>製品名：<%= f.text_field :product_name %></p>
+  <p>購入年度：<%= f.text_field :purchase_year %></p>
+  <p>資産番号：<%= f.text_field :asset_num %></p>
+  <p>金額：<%= f.text_field :price %></p>
+  <p>備考：<%= f.text_field :remarks %></p>
+  <%= f.submit "更新" %>
+<% end %>
