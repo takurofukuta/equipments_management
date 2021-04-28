@@ -15,19 +15,29 @@
   <tbody>
     <% @lendings.each do |lending| %>
       <tr>
-        <td><%= lending.equipment.lab_equipment_name %></td>
-        <td><%= lending.equipment.maker_name %></td>
-        <td><%= lending.equipment.product_name %></td>
-        <td><%= lending.equipment.purchase_year %></td>
-        <td><%= lending.equipment.asset_num %></td>
+        <td><%= lending.borrowed_equipment.lab_equipment_name %></td>
+        <td><%= lending.borrowed_equipment.maker_name %></td>
+        <td><%= lending.borrowed_equipment.product_name %></td>
+        <td><%= lending.borrowed_equipment.purchase_year %></td>
+        <td><%= lending.borrowed_equipment.asset_num %></td>
         <td>
-          <%= lending.user.last_name %>
-          <%= lending.user.first_name %>
-          (<%= lending.user.user_name %>)
+          <%= lending.lending_user.last_name %>
+          <%= lending.lending_user.first_name %>
+          (<%= lending.lending_user.user_name %>)
         </td>
         <td><%= lending.created_at %></td>
         <td>
-          詳細、返却
+          <%= link_to "詳細", equipment_path(lending.borrowed_equipment) %>
+          <% if lending.lendings_status == 0 %>
+            返却済
+          <% elsif lending.lendings_status == 1 %>
+            <% if current_user.id == lending.lending_user.id %>
+              <%= link_to "返却", {controller: "lendings", action: "return", id: lending}, method: :patch %>
+            <% else %>
+              <%= lending.lending_user.user_name %>が貸出
+            <% end %>
+          <% end %>
+
         </td>
       </tr>
     <% end %>

@@ -39,7 +39,14 @@
         <td>
         <%= link_to "詳細", equipment_path(equipment) %>
         <%= link_to "編集", edit_equipment_path(equipment) %>
-        貸出</td>
+
+        <% if equipment.lendings_status == 0 %>
+          <%= link_to "貸出", {controller: "lendings", action: "lending", id: equipment.id}, method: :post %>
+        <% elsif equipment.lendings_status == 1 %>
+          貸出中
+        <% end %>
+
+        </td>
       </tr>
     <% end %>
   </tbody>
