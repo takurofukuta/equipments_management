@@ -2,11 +2,17 @@
 
 <p>備品データの追加</p>
 <%= form_with model: @equipment, url: equipments_path, method: :post, local: true do |f| %>
-  <p>備品ジャンル：<%= f.text_field :genre %></p>
+  <div>
+    <%= f.label :genre %>
+    <%= f.select :genre, Equipment.genres_i18n.invert %>
+  </div>
   <p>研究室用備品名：<%= f.text_field :lab_equipment_name %></p>
   <p>メーカー名：<%= f.text_field :maker_name %></p>
   <p>製品名：<%= f.text_field :product_name %></p>
-  <p>購入年度：<%= f.text_field :purchase_year %></p>
+  <div>
+    <%= f.label :purchase_year %>
+    <%= f.select :purchase_year, options_for_select((1990..2100).to_a) %>
+  </div>
   <p>資産番号：<%= f.text_field :asset_num %></p>
   <p>金額：<%= f.text_field :price %></p>
   <p>備考：<%= f.text_field :remarks %></p>

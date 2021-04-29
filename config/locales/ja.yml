@@ -5,6 +5,7 @@ ja:
     attributes:
       equipment:
         genre: 備品ジャンル
+        purchase_year: 購入年度
       operation_history:
         content: 操作履歴
   views:
