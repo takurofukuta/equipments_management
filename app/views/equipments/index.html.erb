@@ -13,6 +13,8 @@
   <%= f.submit "送信" %>
 <% end %>
 
+<%= link_to "CSVエクスポート",equipments_path(format: :csv) %>
+
 <table border = "1">
   <thead>
     <tr>
