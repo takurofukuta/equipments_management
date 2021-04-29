@@ -2,11 +2,11 @@ class LendingsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @lendings = Lending.where(lendings_status: 1)
+    @lendings = Lending.where(lendings_status: 1).includes(:lending_user, :borrowed_equipment)
   end
 
   def lendings_history
-    @lendings = Lending.all
+    @lendings = Lending.all.includes(:lending_user, :borrowed_equipment)
   end
 
   #備品一覧ページの貸出ボタンを押した時の処理
