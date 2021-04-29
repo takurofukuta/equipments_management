@@ -2,11 +2,17 @@
 
 <p>備品データの追加</p>
 <%= form_with model: @equipment, url: equipments_path, method: :post, local: true do |f| %>
-  <p>備品ジャンル：<%= f.text_field :genre %></p>
+  <div>
+    <%= f.label :genre %>
+    <%= f.select :genre, Equipment.genres_i18n.invert %>
+  </div>
   <p>研究室用備品名：<%= f.text_field :lab_equipment_name %></p>
   <p>メーカー名：<%= f.text_field :maker_name %></p>
   <p>製品名：<%= f.text_field :product_name %></p>
-  <p>購入年度：<%= f.text_field :purchase_year %></p>
+  <div>
+    <%= f.label :purchase_year %>
+    <%= f.select :purchase_year, options_for_select((1990..2100).to_a) %>
+  </div>
   <p>資産番号：<%= f.text_field :asset_num %></p>
   <p>金額：<%= f.text_field :price %></p>
   <p>備考：<%= f.text_field :remarks %></p>
@@ -14,16 +20,26 @@
 <% end %>
 
 <%= link_to "CSVエクスポート",equipments_path(format: :csv) %>
+<%= search_form_for @q, url: equipments_path do |f| %>
+  <%= f.label :genre_eq, "備品ジャンル" %>
+  <%= f.select :genre_eq, Equipment.genres.map{|k, v| [Equipment.genres_i18n[k], v]}, { include_blank: '指定なし' } %>
+  <%= f.label :purchase_year_eq, "購入年" %>
+  <%= f.select :purchase_year_eq, options_for_select((1990..2100).to_a) , { include_blank: '指定なし' } %>
+  <%= f.label :lab_equipment_name_or_maker_name_or_asset_num_cont, "その他項目" %>
+  <%= f.search_field :lab_equipment_name_or_maker_name_or_asset_num_cont, placeholder: "入力してください" %>
+  <%= f.submit "検索" %>
+<% end %>
 
+<%= paginate @equipments %>
 <table border = "1">
   <thead>
     <tr>
-      <th scope = "col">備品ジャンル</th>
-      <th scope = "col">研究室用備品名</th>
-      <th scope = "col">メーカー名</th>
-      <th scope = "col">製品名</th>
-      <th scope = "col">購入年度</th>
-      <th scope = "col">資産番号</th>
+      <th scope = "col"><%= sort_link(@q, :genre, "備品ジャンル") %></th>
+      <th scope = "col"><%= sort_link(@q, :lab_equipment_name, "研究室用備品名") %></th>
+      <th scope = "col"><%= sort_link(@q, :maker_name, "メーカー名") %></th>
+      <th scope = "col"><%= sort_link(@q, :product_name, "製品名") %></th>
+      <th scope = "col"><%= sort_link(@q, :purchase_year, "購入年度") %></th>
+      <th scope = "col"><%= sort_link(@q, :asset_num, "資産番号") %></th>
       <th scope = "col">ステータス</th>
       <th scope = "col"></th>
     </tr>
@@ -53,3 +69,5 @@
     <% end %>
   </tbody>
 </table>
+
+<%= paginate @equipments %>
