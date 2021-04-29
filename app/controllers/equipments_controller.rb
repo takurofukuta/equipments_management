@@ -5,7 +5,8 @@ class EquipmentsController < ApplicationController
   PER_PAGE = 20
 
   def index
-    @equipments = Equipment.page(params[:page]).per(PER_PAGE)
+    @q = Equipment.ransack(params[:q])
+    @equipments = @q.result.page(params[:page]).per(PER_PAGE)
     @equipment = Equipment.new
     @equipments_csv = Equipment.all
 

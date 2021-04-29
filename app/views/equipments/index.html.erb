@@ -14,7 +14,17 @@
 <% end %>
 
 <%= link_to "CSVエクスポート",equipments_path(format: :csv) %>
+<%= search_form_for @q, url: equipments_path do |f| %>
+  <%= f.label :genre_eq, "備品ジャンル" %>
+  <%= f.select :genre_eq, Equipment.genres.map{|k, v| [Equipment.genres_i18n[k], v]}, { include_blank: '指定なし' } %>
+  <%= f.label :purchase_year_eq, "購入年" %>
+  <%= f.select :purchase_year_eq, options_for_select((1990..2100).to_a) , { include_blank: '指定なし' } %>
+  <%= f.label :lab_equipment_name_or_maker_name_or_asset_num_cont, "その他項目" %>
+  <%= f.search_field :lab_equipment_name_or_maker_name_or_asset_num_cont, placeholder: "入力してください" %>
+  <%= f.submit "検索" %>
+<% end %>
 
+<%= paginate @equipments %>
 <table border = "1">
   <thead>
     <tr>
