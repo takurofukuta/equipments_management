@@ -2,8 +2,10 @@ class EquipmentsController < ApplicationController
   before_action :authenticate_user!
   require "csv"
 
+  PER_PAGE = 20
+
   def index
-    @equipments = Equipment.all
+    @equipments = Equipment.page(params[:page]).per(PER_PAGE)
     @equipment = Equipment.new
     @equipments_csv = Equipment.all
 
