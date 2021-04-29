@@ -1,9 +1,18 @@
 class EquipmentsController < ApplicationController
   before_action :authenticate_user!
+  require "csv"
 
   def index
     @equipments = Equipment.all
     @equipment = Equipment.new
+    @equipments_csv = Equipment.all
+
+    respond_to do |format|
+      format.html
+      format.csv do |csv|
+        send_equipments_csv(@equipments_csv)
+      end
+    end
   end
 
   def show
@@ -49,5 +58,29 @@ class EquipmentsController < ApplicationController
       :disposal_status,
       :remarks
     )
+  end
+
+  def send_equipments_csv(equipments)
+    csv_data = CSV.generate do |csv|
+      column_names = %w(備品ジャンル 研究室用備品名 メーカー名 製品名 購入年度 資産番号 値段 データ追加日 データ追加者 備考)
+      csv << column_names
+      equipments.each do |equipment|
+        column_values = [
+          equipment.genre_i18n,
+          equipment.lab_equipment_name,
+          equipment.maker_name,
+          equipment.product_name,
+          equipment.purchase_year,
+          equipment.asset_num,
+          equipment.price,
+          equipment.created_at,
+          equipment.registered_user.user_name,
+          equipment.remarks
+        ]
+        csv << column_values
+      end
+    end
+    time = Time.now
+    send_data(csv_data, filename: "#{time.year}年#{time.month}月#{time.day}日#{time.hour}時#{time.min}分#{time.sec}秒時点_備品一覧.csv")
   end
 end
