@@ -34,12 +34,12 @@
 <table border = "1">
   <thead>
     <tr>
-      <th scope = "col">備品ジャンル</th>
-      <th scope = "col">研究室用備品名</th>
-      <th scope = "col">メーカー名</th>
-      <th scope = "col">製品名</th>
-      <th scope = "col">購入年度</th>
-      <th scope = "col">資産番号</th>
+      <th scope = "col"><%= sort_link(@q, :genre, "備品ジャンル") %></th>
+      <th scope = "col"><%= sort_link(@q, :lab_equipment_name, "研究室用備品名") %></th>
+      <th scope = "col"><%= sort_link(@q, :maker_name, "メーカー名") %></th>
+      <th scope = "col"><%= sort_link(@q, :product_name, "製品名") %></th>
+      <th scope = "col"><%= sort_link(@q, :purchase_year, "購入年度") %></th>
+      <th scope = "col"><%= sort_link(@q, :asset_num, "資産番号") %></th>
       <th scope = "col">ステータス</th>
       <th scope = "col"></th>
     </tr>
