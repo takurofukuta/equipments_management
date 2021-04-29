@@ -38,11 +38,16 @@ gem 'devise-i18n'
 #列挙型
 gem 'enum_help'
 
+#検索機能
+gem 'kaminari'
+
+#その他
+gem 'faker'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-byebug'
-  gem 'faker'
 end
 
 group :development do
