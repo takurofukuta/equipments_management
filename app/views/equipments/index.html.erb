@@ -41,8 +41,11 @@
     <% end %>
   </div>
   <div class="col-12">
-    <%= link_to "備品データ追加",equipments_path(format: :csv), class: "btn btn-link btn-secondary text-light mr-2" %>
-    <%= link_to "CSVエクスポート",equipments_path(format: :csv), class: "btn btn-link btn-secondary text-light" %>
+    <% if current_user.admin? %>
+      <%= link_to "備品データ追加",equipments_path(format: :csv), class: "btn btn-link btn-secondary text-light mr-2" %>
+      <%= link_to "CSVエクスポート",equipments_path(format: :csv), class: "btn btn-link btn-secondary text-light" %>
+    <% else %>
+    <% end %>
     <hr>
     <div>
       <%= search_form_for @q, class: 'form-inline', url: equipments_path do |f| %>

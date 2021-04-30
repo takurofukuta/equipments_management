@@ -11,5 +11,6 @@ class OperationHistory < ApplicationRecord
     add_data: 0,
     edit_data: 1,
     delete_data: 2,
+    csv_export: 3,
   }
 end

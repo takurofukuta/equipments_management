@@ -1,19 +1,38 @@
-<p>操作履歴一覧</p>
-<table border="1">
-  <thead>
-    <tr>
-      <th scope="col">操作したユーザー</th>
-      <th scope="col">操作内容</th>
-      <th scope="col">操作した日時</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @operation_histories.each do |operation_history| %>
-      <tr>
-        <td><%= operation_history.operated_user.user_name %></td>
-        <td><%= operation_history.lab_equipment_name %>を<%= operation_history.content_i18n %></td>
-        <td><%= operation_history.created_at %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="row justify-content-center">
+  <div class="col-12 mb-4">
+    <h1 class="text-center">操作履歴</h1>
+    <hr>
+    <%= paginate @operation_histories %>
+    <table class="table table-bordered table-striped text-center">
+      <thead>
+        <tr>
+          <th scope="col">操作したユーザー</th>
+          <th scope="col">操作内容</th>
+          <th scope="col">操作した日時</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @operation_histories.each do |operation_history| %>
+          <tr>
+            <td>
+              <%= operation_history.operated_user.last_name %>
+              <%= operation_history.operated_user.first_name %>
+            </td>
+            <td>
+              <%= operation_history.lab_equipment_name %>を<%= operation_history.content_i18n %>
+            </td>
+            <td>
+              <%= operation_history.created_at.year %>年
+              <%= operation_history.created_at.month %>月
+              <%= operation_history.created_at.day %>日
+              <%= operation_history.created_at.hour %>時
+              <%= operation_history.created_at.min %>分
+              <%= operation_history.created_at.sec %>秒
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @operation_histories %>
+  </div>
+</div>

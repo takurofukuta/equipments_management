@@ -13,3 +13,4 @@ ja:
         add_data: "追加しました"
         edit_data: "編集しました"
         delete_data: "削除しました"
+        csv_export: "CSVエクスポートしました"

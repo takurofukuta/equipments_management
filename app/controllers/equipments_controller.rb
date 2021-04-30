@@ -85,5 +85,6 @@ class EquipmentsController < ApplicationController
     end
     time = Time.now
     send_data(csv_data, filename: "#{time.year}年#{time.month}月#{time.day}日#{time.hour}時#{time.min}分#{time.sec}秒時点_備品一覧.csv")
+    OperationHistory.create_log(current_user.id, "備品データ", 3)
   end
 end
