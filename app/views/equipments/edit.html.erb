@@ -1,13 +1,43 @@
-<p>備品データの編集</p>
-<%= form_with model: @equipment, url: equipment_path, method: :patch, local: true do |f| %>
-  <p>備品ジャンル：<%= f.text_field :genre %></p>
-  <p>研究室用備品名：<%= f.text_field :lab_equipment_name %></p>
-  <p>メーカー名：<%= f.text_field :maker_name %></p>
-  <p>製品名：<%= f.text_field :product_name %></p>
-  <p>購入年度：<%= f.text_field :purchase_year %></p>
-  <p>資産番号：<%= f.text_field :asset_num %></p>
-  <p>金額：<%= f.text_field :price %></p>
-  <p>備考：<%= f.text_field :remarks %></p>
-  <%= f.submit "更新" %>
-<% end %>
-  <%= link_to "削除", @equipment, method: :delete, data: { confirm: "削除しますか?" } %>
+<div class="row justify-content-center">
+  <div class="col-12">
+    <h1 class="text-center">備品データ編集</h1>
+    <%= form_with model: @equipment, url: equipment_path, method: :patch, local: true do |f| %>
+      <div class="field form-group">
+        <%= f.label :genre %>
+        <%= f.select :genre, Equipment.genres_i18n.invert, {}, class: "form-control"  %>
+      </div>
+      <div class="field form-group">
+        <%= f.label :lab_equipment_name %>
+        <%= f.text_field :lab_equipment_name, class: "form-control"  %>
+      </div>
+      <div class="field form-group">
+        <%= f.label :maker_name %>      
+        <%= f.text_field :maker_name, class: "form-control"  %>
+      </div>
+      <div class="field form-group">
+        <%= f.label :product_name %>      
+        <%= f.text_field :product_name, class: "form-control"  %>
+      </div>
+      <div class="field form-group">
+        <%= f.label :asset_num %>      
+        <%= f.text_field :asset_num, class: "form-control"  %>
+      </div>
+      <div class="field form-group">
+        <%= f.label :price %>      
+        <%= f.text_field :price, class: "form-control"  %>
+      </div>
+      <div class="field form-group">
+        <%= f.label :purchase_year %>
+        <%= f.select :purchase_year, options_for_select((1990..2100).to_a), {}, class: "form-control"  %>
+      </div>
+      <div class="field form-group">
+        <%= f.label :remarks %>
+        <%= f.text_area :remarks, class: "form-control"  %>
+      </div>
+      <div class="actions">
+        <%= f.submit "更新", class: "btn btn-primary form-control"  %>
+      </div>
+    <% end %>
+    <%= link_to "備品データを削除", @equipment, method: :delete, data: { confirm: "本当に削除しますか?" }, class: "btn btn-link btn-danger text-light form-control mt-4"  %>
+  </div>
+</div>

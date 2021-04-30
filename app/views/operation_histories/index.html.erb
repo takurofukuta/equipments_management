@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-12 mb-4">
+  <div class="col-12">
     <h1 class="text-center">操作履歴</h1>
     <hr>
     <%= paginate @operation_histories %>
@@ -19,7 +19,7 @@
               <%= operation_history.operated_user.first_name %>
             </td>
             <td>
-              <%= operation_history.lab_equipment_name %>を<%= operation_history.content_i18n %>
+              <%= operation_history.object %>を<%= operation_history.content_i18n %>
             </td>
             <td>
               <%= operation_history.created_at.year %>年
