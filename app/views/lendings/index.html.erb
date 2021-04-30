@@ -1,45 +1,52 @@
-<p>貸出備品一覧</p>
-<table border="1">
-  <thead>
-    <tr>
-      <th scope="col">研究室用備品名</th>
-      <th scope="col">メーカー名</th>
-      <th scope="col">製品名</th>
-      <th scope="col">購入年度</th>
-      <th scope="col">資産番号</th>
-      <th scope="col">借りてる人</th>
-      <th scope="col">借りた日</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @lendings.each do |lending| %>
-      <tr>
-        <td><%= lending.borrowed_equipment.lab_equipment_name %></td>
-        <td><%= lending.borrowed_equipment.maker_name %></td>
-        <td><%= lending.borrowed_equipment.product_name %></td>
-        <td><%= lending.borrowed_equipment.purchase_year %></td>
-        <td><%= lending.borrowed_equipment.asset_num %></td>
-        <td>
-          <%= lending.lending_user.last_name %>
-          <%= lending.lending_user.first_name %>
-          (<%= lending.lending_user.user_name %>)
-        </td>
-        <td><%= lending.created_at %></td>
-        <td>
-          <%= link_to "詳細", equipment_path(lending.borrowed_equipment) %>
-          <% if lending.lendings_status == 0 %>
-            返却済
-          <% elsif lending.lendings_status == 1 %>
-            <% if current_user.id == lending.lending_user.id %>
-              <%= link_to "返却", {controller: "lendings", action: "return", id: lending}, method: :patch %>
-            <% else %>
-              <%= lending.lending_user.user_name %>が貸出
-            <% end %>
-          <% end %>
+<div class="row justify-content-center">
+  <div class="col-12 mb-4">
+    <h1 class="text-center">貸出状況</h1>
+    <hr>
+    <%= paginate @lendings %>
+    <table class="table table-bordered table-striped text-center">
+      <thead>
+        <tr>
+          <th scope="col" style="width:13%">備品ジャンル</th>
+          <th scope="col" style="width:18%">研究室用備品名</th>
+          <th scope="col" style="width:18%">製品名</th>
+          <th scope="col" style="width:10%">購入年度</th>
+          <th scope="col" style="width:13%">借りた人</th>
+          <th scope="col" style="width:14%">貸出日</th>
+          <th scope="col" style="width:18%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @lendings.each do |lending| %>
+          <tr>
+            <td class="align-middle"><%= lending.borrowed_equipment.genre_i18n %></td>
+            <td class="align-middle"><%= lending.borrowed_equipment.lab_equipment_name %></td>
+            <td class="align-middle"><%= lending.borrowed_equipment.product_name %></td>
+            <td class="align-middle"><%= lending.borrowed_equipment.purchase_year %></td>
+            <td class="align-middle">
+              <%= lending.lending_user.last_name %>
+              <%= lending.lending_user.first_name %>
+            </td>
+            <td class="align-middle">
+              <%= lending.created_at.year %>年
+              <%= lending.created_at.month %>月
+              <%= lending.created_at.day %>日
+            </td>
+            <td class="align-middle">
+              <%= link_to "詳細", equipment_path(lending.borrowed_equipment), class: "btn btn-link btn-primary text-light" %>
+              <% if lending.lendings_status == 0 %>
+                返却済
+              <% elsif lending.lendings_status == 1 %>
+                <% if current_user.id == lending.lending_user.id %>
+                  <%= link_to "返却", {controller: "lendings", action: "return", id: lending}, method: :patch, class: "btn btn-link btn-primary text-light" %>
+                <% else %>
+                <% end %>
+              <% end %>
 
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @lendings %>
+  </div>
+</div>

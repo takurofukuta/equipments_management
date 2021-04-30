@@ -1,8 +1,11 @@
 class LendingsController < ApplicationController
   before_action :authenticate_user!
 
+  PER_PAGE = 20
+
   def index
-    @lendings = Lending.where(lendings_status: 1).includes(:lending_user, :borrowed_equipment)
+    @q = Lending.ransack(params[:q])
+    @lendings = @q.result.page(params[:page]).per(PER_PAGE).where(lendings_status: 1).includes(:lending_user, :borrowed_equipment)
   end
 
   def lendings_history
