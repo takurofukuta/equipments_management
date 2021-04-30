@@ -1,21 +1,69 @@
-<h1>備品データ詳細</h1>
-<p> 備品ジャンル:<%= @equipment.genre %></p>
-<p> 研究室用備品名:<%= @equipment.lab_equipment_name %></p>
-<p> メーカー名:<%= @equipment.maker_name %></p>
-<p> 製品名:<%= @equipment.product_name %></p>
-<p> 購入年度:<%= @equipment.purchase_year %></p>
-<p> 資産番号:<%= @equipment.asset_num %></p>
-<p> 値段:<%= @equipment.price %></p>
-
-<% if @equipment.disposal_status == 0 %>
-<p>未廃棄</p>
-<% elsif @equipment.disposal_status == 1 %>
-<p>廃棄済み</p>
-<% end %>
-
-<p> 備考:<%= @equipment.remarks %></p>
-<p> データ作成者:<%= @equipment.registered_user.user_name %>（<%= @equipment.registered_user.last_name %><%= @equipment.registered_user.first_name %>）</p>
-<p> データ作成日時:<%= @equipment.created_at %></p>
-<p> データ更新日時:<%= @equipment.updated_at %></p>
-
-<%= link_to "編集", edit_equipment_path(@equipment) %>
+<div class="row justify-content-center">
+  <div class="col-12">
+    <h1 class="text-center">備品データ詳細</h1>
+    <hr>
+    <table class="table table-bordered table-striped text-center">
+    <tbody>
+      <tr scope="row">
+        <td>備品ジャンル</td>
+        <td><%= @equipment.genre_i18n %></td>
+      </tr>
+      <tr scope="row">
+        <td>研究室用備品名</td>
+        <td><%= @equipment.lab_equipment_name %></td>
+      </tr>
+      <tr scope="row">
+        <td>メーカー名</td>
+        <td><%= @equipment.maker_name %></td>
+      </tr>
+      <tr scope="row">
+        <td>製品名</td>
+        <td><%= @equipment.product_name %></td>
+      </tr>
+      <tr scope="row">
+        <td>購入年度</td>
+        <td><%= @equipment.purchase_year %>年度</td>
+      </tr>
+      <tr scope="row">
+        <td>資産番号</td>
+        <td><%= @equipment.asset_num %></td>
+      </tr>
+      <tr scope="row">
+        <td>値段</td>
+        <td><%= @equipment.price %>円</td>
+      </tr>
+      <tr scope="row">
+        <td>備考</td>
+        <td><%= @equipment.remarks %></td>
+      </tr>
+      <tr scope="row">
+        <td>データ作成者</td>
+        <td><%= @equipment.registered_user.user_name %>（<%= @equipment.registered_user.last_name %><%= @equipment.registered_user.first_name %>）</td>
+      </tr>
+      <tr scope="row">
+        <td>データ作成日時</td>
+        <td><%= @equipment.created_at %></td>
+      </tr>
+      <tr scope="row">
+        <td>データ更新日時</td>
+        <td><%= @equipment.updated_at %></td>
+      </tr>
+      <tr scope="row">
+        <td>ステータス</td>
+        <td>
+          <% if @equipment.lendings_status== 0 %>
+            貸出可
+          <% elsif @equipment.lendings_status == 1 %>
+            <span class="text-danger">貸出中</span>
+          <% end %>
+          <% if @equipment.disposal_status == 0 %>
+          <% elsif @equipment.disposal_status == 1 %>
+            <span class="text-danger">廃棄済み</span>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+    <%= link_to "編集", edit_equipment_path(@equipment), class: "btn btn-link btn-primary text-light form-control mt-4"  %>
+  </div>
+</div>
