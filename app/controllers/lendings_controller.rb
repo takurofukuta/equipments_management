@@ -9,7 +9,8 @@ class LendingsController < ApplicationController
   end
 
   def lendings_history
-    @lendings = Lending.all.includes(:lending_user, :borrowed_equipment)
+    @q = Lending.ransack(params[:q])
+    @lendings = @q.result.page(params[:page]).per(PER_PAGE).where(lendings_status: 0).includes(:lending_user, :borrowed_equipment)
   end
 
   #備品一覧ページの貸出ボタンを押した時の処理
@@ -26,6 +27,7 @@ class LendingsController < ApplicationController
   def return
     lending = Lending.find(params[:id])
     lending.lendings_status = 0
+    lending.return_time = Time.now
     lending.save
 
     equipment = Equipment.find(lending.borrowed_equipment_id)

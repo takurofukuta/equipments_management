@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2021_04_25_104418) do
     t.integer "lending_user_id", null: false
     t.integer "borrowed_equipment_id", null: false
     t.integer "lendings_status", default: 0, null: false
+    t.datetime "return_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["borrowed_equipment_id"], name: "index_lendings_on_borrowed_equipment_id"
