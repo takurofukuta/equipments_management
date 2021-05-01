@@ -12,3 +12,14 @@ import "bootstrap/dist/js/bootstrap";
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
+
+document.addEventListener("turbolinks:load", () => {
+  $("#form-switch").click(function () {
+    $("#form-wrapper").fadeIn();
+    $("#input-data-form").fadeIn();
+  });
+  $("#close-form").click(function () {
+    $("#form-wrapper").fadeOut();
+    $("#input-data-form").fadeOut();
+  });
+});

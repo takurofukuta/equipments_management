@@ -1,3 +1,8 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+
 @import "bootstrap/scss/bootstrap";
 
 body {
@@ -8,4 +13,32 @@ body {
   @extend .container-fluid;
   max-width: var(--breakpoint-xl);
   padding: 30px 15px;
+}
+
+#form-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  z-index: 99;
+}
+
+#close-form {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  cursor: pointer;
+}
+
+#input-data-form {
+  position: absolute;
+  display: none;
+  z-index: 100;
+  top: 15%;
+  left: 0;
+  right: 0;
+  margin: auto;
 }

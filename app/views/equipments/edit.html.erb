@@ -1,6 +1,7 @@
 <div class="row justify-content-center">
-  <div class="col-12">
+  <div class="col-12">     
     <h1 class="text-center">備品データ編集</h1>
+    <hr>
     <%= form_with model: @equipment, url: equipment_path, method: :patch, local: true do |f| %>
       <div class="field form-group">
         <%= f.label :genre %>
@@ -34,10 +35,10 @@
         <%= f.label :remarks %>
         <%= f.text_area :remarks, class: "form-control"  %>
       </div>
-      <div class="actions">
+      <div class="actions mb-4">
         <%= f.submit "更新", class: "btn btn-primary form-control"  %>
       </div>
     <% end %>
-    <%= link_to "備品データを削除", @equipment, method: :delete, data: { confirm: "本当に削除しますか?" }, class: "btn btn-link btn-danger text-light form-control mt-4"  %>
+  <%= link_to "削除", @equipment, method: :delete, data: { confirm: "本当に削除しますか?" }, class: "btn btn-danger form-control"  %>
   </div>
 </div>

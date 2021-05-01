@@ -1,49 +1,55 @@
 <div class="row justify-content-center">
-  <div class="col-6 mb-4">
-    <h1 class="text-center">備品データ一覧</h1>
-    <p>備品データの追加</p>
-    <%= form_with model: @equipment, url: equipments_path, method: :post, local: true do |f| %>
-      <div class="field form-group">
-        <%= f.label :genre %>
-        <%= f.select :genre, Equipment.genres_i18n.invert, {}, class: "form-control"  %>
+  <div id="form-wrapper">
+    <div class="col-6 bg-light overflow-auto border border-dark rounded h-75" id="input-data-form">     
+      <div id="close-form">
+        ×
       </div>
-      <div class="field form-group">
-        <%= f.label :lab_equipment_name %>
-        <%= f.text_field :lab_equipment_name, class: "form-control"  %>
-      </div>
-      <div class="field form-group">
-        <%= f.label :maker_name %>      
-        <%= f.text_field :maker_name, class: "form-control"  %>
-      </div>
-      <div class="field form-group">
-        <%= f.label :product_name %>      
-        <%= f.text_field :product_name, class: "form-control"  %>
-      </div>
-      <div class="field form-group">
-        <%= f.label :asset_num %>      
-        <%= f.text_field :asset_num, class: "form-control"  %>
-      </div>
-      <div class="field form-group">
-        <%= f.label :price %>      
-        <%= f.text_field :price, class: "form-control"  %>
-      </div>
-      <div class="field form-group">
-        <%= f.label :purchase_year %>
-        <%= f.select :purchase_year, options_for_select((1990..2100).to_a), {}, class: "form-control"  %>
-      </div>
-      <div class="field form-group">
-        <%= f.label :remarks %>
-        <%= f.text_area :remarks, class: "form-control"  %>
-      </div>
-      <div class="actions">
-        <%= f.submit "送信", class: "btn btn-primary form-control"  %>
-      </div>
-    <% end %>
+      <h2 class="text-center mt-4">備品データ追加</h2>
+      <%= form_with model: @equipment, url: equipments_path, method: :post, local: true do |f| %>
+        <div class="field form-group">
+          <%= f.label :genre %>
+          <%= f.select :genre, Equipment.genres_i18n.invert, {}, class: "form-control"  %>
+        </div>
+        <div class="field form-group">
+          <%= f.label :lab_equipment_name %>
+          <%= f.text_field :lab_equipment_name, class: "form-control"  %>
+        </div>
+        <div class="field form-group">
+          <%= f.label :maker_name %>      
+          <%= f.text_field :maker_name, class: "form-control"  %>
+        </div>
+        <div class="field form-group">
+          <%= f.label :product_name %>      
+          <%= f.text_field :product_name, class: "form-control"  %>
+        </div>
+        <div class="field form-group">
+          <%= f.label :asset_num %>      
+          <%= f.text_field :asset_num, class: "form-control"  %>
+        </div>
+        <div class="field form-group">
+          <%= f.label :price %>      
+          <%= f.text_field :price, class: "form-control"  %>
+        </div>
+        <div class="field form-group">
+          <%= f.label :purchase_year %>
+          <%= f.select :purchase_year, options_for_select((1990..2100).to_a), {}, class: "form-control"  %>
+        </div>
+        <div class="field form-group">
+          <%= f.label :remarks %>
+          <%= f.text_area :remarks, class: "form-control"  %>
+        </div>
+        <div class="actions mb-4">
+          <%= f.submit "送信", class: "btn btn-primary form-control"  %>
+        </div>
+      <% end %>
+    </div>
   </div>
   <div class="col-12">
+    <h1 class="text-center">備品データ一覧</h1>
+    <hr>
     <% if current_user.admin? %>
-      <%= link_to "備品データ追加",equipments_path(format: :csv), class: "btn btn-link btn-secondary text-light mr-2" %>
-      <%= link_to "CSVエクスポート",equipments_path(format: :csv), class: "btn btn-link btn-secondary text-light" %>
+      <span class="btn btn-secondary text-light mr-2" id="form-switch">備品データ追加</span>
+      <%= link_to "CSVエクスポート",equipments_path(format: :csv), class: "btn btn-secondary text-light" %>
     <% else %>
     <% end %>
     <hr>
@@ -95,19 +101,19 @@
               <% end %>
               <% if equipment.disposal_status == 0 %>
               <% elsif equipment.disposal_status == 1 %>
-                / <span class="text-danger">廃棄済</span>
+                <span class="text-danger">/ 廃棄済</span>
               <% end %>
             </td>
             <td class="align-middle">
               <% if current_user.admin? %>
-                <%= link_to "詳細", equipment_path(equipment), class: "btn btn-link btn-primary text-light" %>
-                <%= link_to "編集", edit_equipment_path(equipment), class: "btn btn-link btn-secondary text-light" %>
+                <%= link_to "詳細", equipment_path(equipment), class: "btn btn-primary text-light" %>
+                <%= link_to "編集", edit_equipment_path(equipment), class: "btn btn-secondary text-light" %>
               <% else %>
-                <%= link_to "詳細", equipment, class: "btn btn-link btn-primary text-light" %>
+                <%= link_to "詳細", equipment, class: "btn btn-primary text-light" %>
               <% end %>
 
               <% if equipment.lendings_status == 0 %>
-                  <%= link_to "貸出", {controller: "lendings", action: "lending", id: equipment.id}, method: :post, class: "btn btn-link btn-primary text-light" %>
+                  <%= link_to "貸出", {controller: "lendings", action: "lending", id: equipment.id}, method: :post, class: "btn btn-primary text-light" %>
               <% elsif equipment.lendings_status == 1 %>
               <% end %>
             </td>
