@@ -5,7 +5,13 @@ ja:
     attributes:
       equipment:
         genre: 備品ジャンル
+        lab_equipment_name: 研究室備品名
+        maker_name: メーカー名
+        product_name: 製品名
         purchase_year: 購入年度
+        asset_num: 資産番号
+        price: 値段
+        remarks: 備考
       operation_history:
         content: 操作履歴
   views:

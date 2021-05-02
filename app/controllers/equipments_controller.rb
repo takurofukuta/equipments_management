@@ -27,23 +27,34 @@ class EquipmentsController < ApplicationController
   end
 
   def create
-    current_user.equipments.create!(equipment_params)
-    OperationHistory.create_log(current_user.id, equipment_params[:lab_equipment_name], 0)
-    redirect_to root_path
+    @equipment = current_user.equipments.new(equipment_params)
+    if @equipment.save
+      OperationHistory.create_log(current_user.id, equipment_params[:lab_equipment_name], 0)
+      redirect_to equipments_path, notice: "データを追加しました"
+    else
+      @q = Equipment.ransack(params[:q])
+      @equipments = @q.result.page(params[:page]).per(PER_PAGE)
+      flash.now[:alert] = "データの追加に失敗しました"
+      render :index
+    end
   end
 
   def update
-    equipment = Equipment.find(params[:id])
-    equipment.update!(equipment_params)
-    OperationHistory.create_log(current_user.id, equipment.lab_equipment_name, 1)
-    redirect_to equipment
+    @equipment = Equipment.find(params[:id])
+    OperationHistory.create_log(current_user.id, @equipment.lab_equipment_name, 1)
+    if @equipment.update(equipment_params)
+      redirect_to @equipment, notice: "データを更新しました"
+    else
+      flash.now[:alert] = "データの更新に失敗しました"
+      render :edit
+    end
   end
 
   def destroy
     equipment = Equipment.find(params[:id])
     equipment.destroy!
     OperationHistory.create_log(current_user.id, equipment.lab_equipment_name, 2)
-    redirect_to root_path
+    redirect_to root_path, alert: "データを削除しました"
   end
 
   private
@@ -85,5 +96,6 @@ class EquipmentsController < ApplicationController
     end
     time = Time.now
     send_data(csv_data, filename: "#{time.year}年#{time.month}月#{time.day}日#{time.hour}時#{time.min}分#{time.sec}秒時点_備品一覧.csv")
+    OperationHistory.create_log(current_user.id, "備品データ", 3)
   end
 end

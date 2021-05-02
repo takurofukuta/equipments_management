@@ -1,8 +1,10 @@
-<div class="row justify-content-center">
-  <div class="col-12">     
-    <h1 class="text-center">備品データ編集</h1>
-    <hr>
-    <%= form_with model: @equipment, url: equipment_path, method: :patch, local: true do |f| %>
+<div id="form-wrapper">
+  <div class="col-6 bg-light overflow-auto border border-dark rounded h-75" id="input-data-form">     
+    <div id="close-form">
+      ×
+    </div>
+    <h2 class="text-center mt-4">備品データ追加</h2>
+    <%= form_with model: @equipment, url: equipments_path, method: :post, local: true do |f| %>
       <div class="field form-group">
         <%= f.label :genre %>
         <%= f.select :genre, Equipment.genres_i18n.invert, {}, class: "form-control"  %>
@@ -36,9 +38,8 @@
         <%= f.text_area :remarks, class: "form-control"  %>
       </div>
       <div class="actions mb-4">
-        <%= f.submit "更新", class: "btn btn-primary form-control"  %>
+        <%= f.submit "送信", class: "btn btn-primary form-control"  %>
       </div>
     <% end %>
-  <%= link_to "削除", @equipment, method: :delete, data: { confirm: "本当に削除しますか?" }, class: "btn btn-danger form-control"  %>
   </div>
 </div>

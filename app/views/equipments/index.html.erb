@@ -1,73 +1,83 @@
-<h1>Equipments#index</h1>
-
-<p>備品データの追加</p>
-<%= form_with model: @equipment, url: equipments_path, method: :post, local: true do |f| %>
-  <div>
-    <%= f.label :genre %>
-    <%= f.select :genre, Equipment.genres_i18n.invert %>
-  </div>
-  <p>研究室用備品名：<%= f.text_field :lab_equipment_name %></p>
-  <p>メーカー名：<%= f.text_field :maker_name %></p>
-  <p>製品名：<%= f.text_field :product_name %></p>
-  <div>
-    <%= f.label :purchase_year %>
-    <%= f.select :purchase_year, options_for_select((1990..2100).to_a) %>
-  </div>
-  <p>資産番号：<%= f.text_field :asset_num %></p>
-  <p>金額：<%= f.text_field :price %></p>
-  <p>備考：<%= f.text_field :remarks %></p>
-  <%= f.submit "送信" %>
-<% end %>
-
-<%= link_to "CSVエクスポート",equipments_path(format: :csv) %>
-<%= search_form_for @q, url: equipments_path do |f| %>
-  <%= f.label :genre_eq, "備品ジャンル" %>
-  <%= f.select :genre_eq, Equipment.genres.map{|k, v| [Equipment.genres_i18n[k], v]}, { include_blank: '指定なし' } %>
-  <%= f.label :purchase_year_eq, "購入年" %>
-  <%= f.select :purchase_year_eq, options_for_select((1990..2100).to_a) , { include_blank: '指定なし' } %>
-  <%= f.label :lab_equipment_name_or_maker_name_or_asset_num_cont, "その他項目" %>
-  <%= f.search_field :lab_equipment_name_or_maker_name_or_asset_num_cont, placeholder: "入力してください" %>
-  <%= f.submit "検索" %>
-<% end %>
-
-<%= paginate @equipments %>
-<table border = "1">
-  <thead>
-    <tr>
-      <th scope = "col"><%= sort_link(@q, :genre, "備品ジャンル") %></th>
-      <th scope = "col"><%= sort_link(@q, :lab_equipment_name, "研究室用備品名") %></th>
-      <th scope = "col"><%= sort_link(@q, :maker_name, "メーカー名") %></th>
-      <th scope = "col"><%= sort_link(@q, :product_name, "製品名") %></th>
-      <th scope = "col"><%= sort_link(@q, :purchase_year, "購入年度") %></th>
-      <th scope = "col"><%= sort_link(@q, :asset_num, "資産番号") %></th>
-      <th scope = "col">ステータス</th>
-      <th scope = "col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @equipments.each do |equipment| %>
-      <tr>
-        <td><%= equipment.genre_i18n %></td>
-        <td><%= equipment.lab_equipment_name %></td>
-        <td><%= equipment.maker_name %></td>
-        <td><%= equipment.product_name %></td>
-        <td><%= equipment.purchase_year %></td>
-        <td><%= equipment.asset_num %></td>
-        <td>返却済 / 廃棄済</td>
-        <td>
-        <%= link_to "詳細", equipment_path(equipment) %>
-        <%= link_to "編集", edit_equipment_path(equipment) %>
-
-        <% if equipment.lendings_status == 0 %>
-          <%= link_to "貸出", {controller: "lendings", action: "lending", id: equipment.id}, method: :post %>
-        <% elsif equipment.lendings_status == 1 %>
-          貸出中
-        <% end %>
-
-        </td>
-      </tr>
+<div class="row justify-content-center">
+  <%= render "equipments/new" %>
+  <div class="col-12">
+    <h1 class="text-center">備品データ一覧</h1>
+    <hr>
+    <% if current_user.admin? %>
+      <span class="btn btn-secondary text-light mr-2" id="form-switch">備品データ追加</span>
+      <%= link_to "CSVエクスポート",equipments_path(format: :csv), class: "btn btn-secondary text-light" %>
+    <% else %>
     <% end %>
-  </tbody>
-</table>
+    <hr>
+    <div>
+      <%= search_form_for @q, class: 'form-inline', url: equipments_path do |f| %>
+      <div class="form-group pr-4">
+        <%= f.label :genre_eq, "備品ジャンル", class: "pr-2" %>
+        <%= f.select :genre_eq, Equipment.genres.map{|k, v| [Equipment.genres_i18n[k], v]}, { include_blank: 'すべて' }, class: "form-control" %>
+      </div>
+      <div class="form-group pr-4">
+        <%= f.label :purchase_year_eq, "購入年度", class: "pr-2" %>
+        <%= f.select :purchase_year_eq, options_for_select((1990..2100).to_a) , { include_blank: '指定なし' }, class: "form-control" %>
+      </div>
+      <div class="form-group pr-4">
+        <%= f.label :lab_equipment_name_or_asset_num_cont, "その他項目", class: "pr-2" %>
+        <%= f.search_field :lab_equipment_name_or_asset_num_cont, placeholder: "入力してください", class: "form-control" %>
+      </div>
+      <%= f.submit "検索", class: "btn btn-primary form-control" %>
+      <% end %>
+    </div>
+    <hr>
+    <%= paginate @equipments %>
 
-<%= paginate @equipments %>
+    <table class="table table-bordered table-striped text-center">
+      <thead>
+        <tr>
+          <th scope="col" style="width:13%"><%= sort_link(@q, :genre, "備品ジャンル") %></th>
+          <th scope="col" style="width:15%"><%= sort_link(@q, :lab_equipment_name, "研究室用備品名") %></th>
+          <th scope="col" style="width:18%"><%= sort_link(@q, :product_name, "製品名") %></th>
+          <th scope="col" style="width:10%"><%= sort_link(@q, :purchase_year, "購入年度") %></th>
+          <th scope="col" style="width:12%"><%= sort_link(@q, :asset_num, "資産番号") %></th>
+          <th scope="col" style="width:12%">ステータス</th>
+          <th scope="col" style="width:20%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @equipments.each do |equipment| %>
+          <tr>
+            <td class="align-middle"><%= equipment.genre_i18n %></td>
+            <td class="align-middle"><%= equipment.lab_equipment_name %></td>
+            <td class="align-middle"><%= equipment.product_name %></td>
+            <td class="align-middle"><%= equipment.purchase_year %></td>
+            <td class="align-middle"><%= equipment.asset_num %></td>
+            <td class="align-middle">
+              <% if equipment.lendings_status == 0 %>
+                貸出可
+              <% elsif equipment.lendings_status == 1 %>
+                <span class="text-danger">貸出中</span>
+              <% end %>
+              <% if equipment.disposal_status == 0 %>
+              <% elsif equipment.disposal_status == 1 %>
+                <span class="text-danger">/ 廃棄済</span>
+              <% end %>
+            </td>
+            <td class="align-middle">
+              <% if current_user.admin? %>
+                <%= link_to "詳細", equipment_path(equipment), class: "btn btn-primary text-light" %>
+                <%= link_to "編集", edit_equipment_path(equipment), class: "btn btn-secondary text-light" %>
+              <% else %>
+                <%= link_to "詳細", equipment, class: "btn btn-primary text-light" %>
+              <% end %>
+
+              <% if equipment.lendings_status == 0 %>
+                  <%= link_to "貸出", {controller: "lendings", action: "lending", id: equipment.id}, method: :post, class: "btn btn-primary text-light" %>
+              <% elsif equipment.lendings_status == 1 %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= paginate @equipments %>
+  </div>
+</div>

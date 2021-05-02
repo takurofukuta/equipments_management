@@ -1,0 +1,60 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap/scss/bootstrap";
+
+body {
+  padding-top: 56px;
+}
+
+.base-container {
+  @extend .container-fluid;
+  max-width: var(--breakpoint-xl);
+  padding: 30px 15px;
+}
+
+div.field_with_errors {
+  display: contents;
+
+  input {
+    border: 2px solid red;
+  }
+}
+
+.alert-notice {
+  @extend .alert-success;
+}
+
+.alert-alert {
+  @extend .alert-danger;
+}
+
+#form-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  z-index: 99;
+}
+
+#close-form {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  cursor: pointer;
+}
+
+#input-data-form {
+  position: absolute;
+  display: none;
+  z-index: 100;
+  top: 15%;
+  left: 0;
+  right: 0;
+  margin: auto;
+}

@@ -4,6 +4,7 @@ class CreateLendings < ActiveRecord::Migration[6.1]
       t.integer :lending_user_id, null: false, index: true
       t.integer :borrowed_equipment_id, null: false, index: true
       t.integer :lendings_status, null: false, default: 0
+      t.timestamp :return_time
       t.timestamps
     end
     add_foreign_key :lendings, :users, column: :lending_user_id
