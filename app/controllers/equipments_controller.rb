@@ -27,23 +27,34 @@ class EquipmentsController < ApplicationController
   end
 
   def create
-    current_user.equipments.create!(equipment_params)
-    OperationHistory.create_log(current_user.id, equipment_params[:lab_equipment_name], 0)
-    redirect_to root_path
+    @equipment = current_user.equipments.new(equipment_params)
+    if @equipment.save
+      OperationHistory.create_log(current_user.id, equipment_params[:lab_equipment_name], 0)
+      redirect_to equipments_path, notice: "データを追加しました"
+    else
+      @q = Equipment.ransack(params[:q])
+      @equipments = @q.result.page(params[:page]).per(PER_PAGE)
+      flash.now[:alert] = "データの追加に失敗しました"
+      render :index
+    end
   end
 
   def update
-    equipment = Equipment.find(params[:id])
-    equipment.update!(equipment_params)
-    OperationHistory.create_log(current_user.id, equipment.lab_equipment_name, 1)
-    redirect_to equipment
+    @equipment = Equipment.find(params[:id])
+    OperationHistory.create_log(current_user.id, @equipment.lab_equipment_name, 1)
+    if @equipment.update(equipment_params)
+      redirect_to @equipment, notice: "データを更新しました"
+    else
+      flash.now[:alert] = "データの更新に失敗しました"
+      render :edit
+    end
   end
 
   def destroy
     equipment = Equipment.find(params[:id])
     equipment.destroy!
     OperationHistory.create_log(current_user.id, equipment.lab_equipment_name, 2)
-    redirect_to root_path
+    redirect_to root_path, alert: "データを削除しました"
   end
 
   private

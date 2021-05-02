@@ -15,6 +15,22 @@ body {
   padding: 30px 15px;
 }
 
+div.field_with_errors {
+  display: contents;
+
+  input {
+    border: 2px solid red;
+  }
+}
+
+.alert-notice {
+  @extend .alert-success;
+}
+
+.alert-alert {
+  @extend .alert-danger;
+}
+
 #form-wrapper {
   position: fixed;
   top: 0;
