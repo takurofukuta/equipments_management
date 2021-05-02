@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary fixed-top">
+  <span class="navbar-brand">研究室備品管理アプリ</span>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <% if user_signed_in? %>
+      <div class="navbar-nav mr-auto">
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-item nav-link active" %>
+        <%= link_to "備品データ一覧", equipments_path, class: "nav-item nav-link active" %>
+        <%= link_to "貸出状況", lendings_path, class: "nav-item nav-link active" %>
+        <%= link_to "貸出履歴", lendings_history_path, class: "nav-item nav-link active" %>
+        <%= link_to "操作履歴", operation_history_path, class: "nav-item nav-link active" %>
+      </div>
+      <div class="navbar-nav">
+      <span class="navbar-text">
+        現在のアカウント:
+        <%= current_user.last_name %>
+        <%= current_user.first_name %>
+        （<%= current_user.user_name %>）
+        <% if current_user.admin? %>
+          / 管理者権限有り
+        <% else %>
+        <% end %>
+      </span>
+      </div>
+    <% else %>
+      <div class="navbar-nav mr-auto">
+        <%= link_to "新規登録", new_user_registration_path, class: "nav-item nav-link active" %>
+        <%= link_to "ログイン", new_user_session_path, class: "nav-item nav-link active" %>
+      </div>
+    <% end %>
+  </div>
+</nav>
