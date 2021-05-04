@@ -42,11 +42,23 @@
         </tr>
         <tr scope="row">
           <td>データ作成日時</td>
-          <td><%= @equipment.created_at %></td>
+          <td>
+            <%= @equipment.created_at.year %>年
+            <%= @equipment.created_at.month %>月
+            <%= @equipment.created_at.day %>日
+            <%= @equipment.created_at.hour %>時
+            <%= @equipment.created_at.min %>分
+          </td>
         </tr>
         <tr scope="row">
           <td>データ更新日時</td>
-          <td><%= @equipment.updated_at %></td>
+          <td>
+            <%= @equipment.updated_at.year %>年
+            <%= @equipment.updated_at.month %>月
+            <%= @equipment.updated_at.day %>日
+            <%= @equipment.updated_at.hour %>時
+            <%= @equipment.updated_at.min %>分
+          </td>
         </tr>
         <tr scope="row">
           <td>ステータス</td>
