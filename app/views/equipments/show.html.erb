@@ -1,3 +1,4 @@
+<%= render "layouts/flash_error_msg", object: @equipment %>
 <div class="row justify-content-center">
   <div class="col-12">  
     <h1 class="text-center">備品データ詳細</h1>
@@ -6,7 +7,7 @@
       <tbody>
         <tr scope="row">
           <td>備品ジャンル</td>
-          <td><%= @equipment.genre %></td>
+          <td><%= @equipment.genre_i18n %></td>
         </tr>
         <tr scope="row">
           <td>研究室用備品名</td>
@@ -42,11 +43,23 @@
         </tr>
         <tr scope="row">
           <td>データ作成日時</td>
-          <td><%= @equipment.created_at %></td>
+          <td>
+            <%= @equipment.created_at.year %>年
+            <%= @equipment.created_at.month %>月
+            <%= @equipment.created_at.day %>日
+            <%= @equipment.created_at.hour %>時
+            <%= @equipment.created_at.min %>分
+          </td>
         </tr>
         <tr scope="row">
           <td>データ更新日時</td>
-          <td><%= @equipment.updated_at %></td>
+          <td>
+            <%= @equipment.updated_at.year %>年
+            <%= @equipment.updated_at.month %>月
+            <%= @equipment.updated_at.day %>日
+            <%= @equipment.updated_at.hour %>時
+            <%= @equipment.updated_at.min %>分
+          </td>
         </tr>
         <tr scope="row">
           <td>ステータス</td>

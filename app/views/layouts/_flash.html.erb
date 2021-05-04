@@ -5,11 +5,3 @@
   </div>
 <% end %>
 
-<% if @equipment.errors.any? %>
-  <% @equipment.errors.full_messages.each do |msg| %>
-    <div class="alert alert-danger" role="alert">
-      <a href="#" class="close" data-dismiss="alert">×</a>
-      <%= msg %>
-    </div>
-  <% end %>
-<% end %>

@@ -1,26 +1,27 @@
+<%= render "layouts/flash_error_msg", object: @equipment %>
 <div class="row justify-content-center">
   <div class="col-12">     
     <h1 class="text-center">備品データ編集</h1>
     <hr>
     <%= form_with model: @equipment, url: equipment_path, method: :patch, local: true do |f| %>
       <div class="field form-group">
-        <%= f.label :genre %>
+        <%= f.label :genre %>（必須）
         <%= f.select :genre, Equipment.genres_i18n.invert, {}, class: "form-control"  %>
       </div>
       <div class="field form-group">
-        <%= f.label :lab_equipment_name %>
+        <%= f.label :lab_equipment_name %>（必須）
         <%= f.text_field :lab_equipment_name, class: "form-control"  %>
       </div>
       <div class="field form-group">
-        <%= f.label :maker_name %>      
+        <%= f.label :maker_name %>（必須）  
         <%= f.text_field :maker_name, class: "form-control"  %>
       </div>
       <div class="field form-group">
-        <%= f.label :product_name %>      
+        <%= f.label :product_name %>（必須）    
         <%= f.text_field :product_name, class: "form-control"  %>
       </div>
       <div class="field form-group">
-        <%= f.label :asset_num %>      
+        <%= f.label :asset_num %>  
         <%= f.text_field :asset_num, class: "form-control"  %>
       </div>
       <div class="field form-group">
@@ -28,7 +29,7 @@
         <%= f.text_field :price, class: "form-control"  %>
       </div>
       <div class="field form-group">
-        <%= f.label :purchase_year %>
+        <%= f.label :purchase_year %>（必須）
         <%= f.select :purchase_year, options_for_select((1990..2100).to_a), {}, class: "form-control"  %>
       </div>
       <div class="field form-group">
@@ -39,6 +40,7 @@
         <%= f.submit "更新", class: "btn btn-primary form-control"  %>
       </div>
     <% end %>
+  <%= link_to "詳細ページへ戻る", @equipment,  class: "btn btn-primary form-control mb-4"  %>
   <%= link_to "削除", @equipment, method: :delete, data: { confirm: "本当に削除しますか?" }, class: "btn btn-danger form-control"  %>
   </div>
 </div>
