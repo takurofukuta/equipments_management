@@ -43,7 +43,7 @@ class EquipmentsController < ApplicationController
     @equipment = Equipment.find(params[:id])
     OperationHistory.create_log(current_user.id, @equipment.lab_equipment_name, 1)
     if @equipment.update(equipment_params)
-      redirect_to @equipment, notice: "データを更新しました"
+      redirect_to equipment_path(params[:id]), notice: "データを更新しました"
     else
       flash.now[:alert] = "データの更新に失敗しました"
       render :edit

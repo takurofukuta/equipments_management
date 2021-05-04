@@ -1,3 +1,4 @@
+<%= render "layouts/flash_error_msg", object: @equipment %>
 <div class="row justify-content-center">
   <div class="col-12">  
     <h1 class="text-center">備品データ詳細</h1>
@@ -6,7 +7,7 @@
       <tbody>
         <tr scope="row">
           <td>備品ジャンル</td>
-          <td><%= @equipment.genre %></td>
+          <td><%= @equipment.genre_i18n %></td>
         </tr>
         <tr scope="row">
           <td>研究室用備品名</td>
