@@ -5,12 +5,12 @@ class LendingsController < ApplicationController
 
   def index
     @q = Lending.ransack(params[:q])
-    @lendings = @q.result.page(params[:page]).per(PER_PAGE).where(lendings_status: 1).includes(:lending_user, :borrowed_equipment)
+    @lendings = @q.result.page(params[:page]).per(PER_PAGE).where(lendings_status: 1).includes(:lending_user, :borrowed_equipment).order(created_at: "DESC")
   end
 
   def lendings_history
     @q = Lending.ransack(params[:q])
-    @lendings = @q.result.page(params[:page]).per(PER_PAGE).where(lendings_status: 0).includes(:lending_user, :borrowed_equipment)
+    @lendings = @q.result.page(params[:page]).per(PER_PAGE).where(lendings_status: 0).includes(:lending_user, :borrowed_equipment).order(created_at: "DESC")
   end
 
   #備品一覧ページの貸出ボタンを押した時の処理
