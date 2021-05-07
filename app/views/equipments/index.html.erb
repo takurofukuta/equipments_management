@@ -3,8 +3,8 @@
   <%= render "equipments/new" %>
   <div class="col-12">
     <h1 class="text-center">備品データ一覧</h1>
-    <hr>
     <% if current_user.admin? %>
+      <hr>
       <span class="btn btn-secondary text-light mr-2" id="form-switch">備品データ追加</span>
       <%= link_to "CSVエクスポート",equipments_path(format: :csv), class: "btn btn-secondary text-light" %>
     <% else %>
@@ -51,14 +51,14 @@
             <td class="align-middle"><%= equipment.purchase_year %></td>
             <td class="align-middle"><%= equipment.asset_num %></td>
             <td class="align-middle">
-              <% if equipment.lendings_status == 0 %>
-                貸出可
-              <% elsif equipment.lendings_status == 1 %>
-                <span class="text-danger">貸出中</span>
-              <% end %>
               <% if equipment.disposal_status == 0 %>
+                <% if equipment.lendings_status == 0 %>
+                  貸出可
+                <% elsif equipment.lendings_status == 1 %>
+                  <span class="text-danger">貸出中</span>
+                <% end %>
               <% elsif equipment.disposal_status == 1 %>
-                <span class="text-danger">/ 廃棄済</span>
+                <span class="text-danger">廃棄済</span>
               <% end %>
             </td>
             <td class="align-middle">
@@ -68,17 +68,18 @@
               <% else %>
                 <%= link_to "詳細", equipment, class: "btn btn-primary text-light" %>
               <% end %>
-
-              <% if equipment.lendings_status == 0 %>
-                  <%= link_to "貸出", {controller: "lendings", action: "lending", id: equipment.id}, method: :post, class: "btn btn-primary text-light" %>
-              <% elsif equipment.lendings_status == 1 %>
+              <% if equipment.disposal_status == 0 %>
+                <% if equipment.lendings_status == 0 %>
+                    <%= link_to "貸出", {controller: "lendings", action: "lending", id: equipment.id}, method: :post, class: "btn btn-primary text-light" %>
+                <% elsif equipment.lendings_status == 1 %>
+                <% end %>
+              <% elsif equipment.disposal_status == 1 %>
               <% end %>
             </td>
           </tr>
         <% end %>
       </tbody>
     </table>
-
     <%= paginate @equipments %>
   </div>
 </div>

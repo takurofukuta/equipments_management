@@ -36,6 +36,14 @@
         <%= f.label :remarks %>
         <%= f.text_area :remarks, class: "form-control"  %>
       </div>
+      <div class="custom-control custom-checkbox mb-4">
+        <% if @equipment.disposal_status == 0 %>
+          <%= f.check_box :disposal_status, class: "custom-control-input", checked: false ,checked_value: 1, unchecked_value: 0 %>
+        <% elsif @equipment.disposal_status == 1 %>
+          <%= f.check_box :disposal_status, class: "custom-control-input", checked: true ,checked_value: 1, unchecked_value: 0 %>
+        <% end %>
+        <%= f.label :disposal_status, class: "custom-control-label" %>
+      </div>
       <div class="actions mb-4">
         <%= f.submit "更新", class: "btn btn-primary form-control"  %>
       </div>
