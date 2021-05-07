@@ -15,6 +15,7 @@
         <% @operation_histories.each do |operation_history| %>
           <tr>
             <td>
+              <%= operation_history.operated_user.assignment_year %>年度配属
               <%= operation_history.operated_user.last_name %>
               <%= operation_history.operated_user.first_name %>
             </td>
