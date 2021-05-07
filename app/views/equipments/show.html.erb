@@ -64,13 +64,12 @@
         <tr scope="row">
           <td>ステータス</td>
           <td>
-            <% if @equipment.lendings_status == 0 %>
-              貸出可
-            <% elsif @equipment.lendings_status == 1 %>
-              <span class="text-danger">貸出中</span>
-            <% end %>
             <% if @equipment.disposal_status == 0 %>
-              未廃棄
+              <% if @equipment.lendings_status == 0 %>
+                貸出可
+              <% elsif @equipment.lendings_status == 1 %>
+                <span class="text-danger">貸出中</span>
+              <% end %>
             <% elsif @equipment.disposal_status == 1 %>
               <span class="text-danger">廃棄済み</span>
             <% end %>

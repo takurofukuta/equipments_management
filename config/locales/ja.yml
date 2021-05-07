@@ -11,6 +11,7 @@ ja:
         purchase_year: 購入年度
         asset_num: 資産番号
         price: 値段
+        disposal_status: 廃棄
         remarks: 備考
       operation_history:
         content: 操作履歴
