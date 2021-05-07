@@ -1,34 +1,51 @@
-<h2><%= t('.title', resource: resource.model_name.human) %></h2>
+<div class="row justify-content-center">
+  <div class="col-6">
+    <h1 class="text-center"><%= t('.title', resource: resource.model_name.human) %></h1>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(<%= t('.leave_blank_if_you_don_t_want_to_change_it') %>)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
+      <div class="field form-group">
+        <%= f.label :user_name %><br />
+        <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name", class: "form-control" %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :last_name %><br />
+        <%= f.text_field :last_name, autocomplete: "last_name", class: "form-control" %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :first_name %><br />
+        <%= f.text_field :first_name, autocomplete: "first_name", class: "form-control" %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :assignment_year %><br />
+        <%= f.text_field :assignment_year, autocomplete: "assignment_year", class: "form-control" %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :password %> 
+        (<%= t('.leave_blank_if_you_don_t_want_to_change_it') %>)
+        <%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :current_password %>(<%= t('.we_need_your_current_password_to_confirm_your_changes') %>)
+        <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit t('.update'), class: "btn btn-primary form-control" %>
+      </div>
     <% end %>
+
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(<%= t('.we_need_your_current_password_to_confirm_your_changes') %>)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit t('.update') %>
-  </div>
-<% end %>
-
-<h3><%= t('.cancel_my_account') %></h3>
-
-<p><%= t('.unhappy') %> <%= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure') }, method: :delete %></p>
-
-<%= link_to t('devise.shared.links.back'), :back %>
+</div>
