@@ -6,6 +6,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :authentication_keys => [:user_name]
 
+  validates :user_name, uniqueness: true
+
   # No use email
   def email_required?
     false

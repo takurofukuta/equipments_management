@@ -39,7 +39,12 @@
         </tr>
         <tr scope="row">
           <td>データ作成者</td>
-          <td><%= @equipment.registered_user.user_name %>（<%= @equipment.registered_user.last_name %><%= @equipment.registered_user.first_name %>）</td>
+          <td>
+            <%= @equipment.registered_user.assignment_year %>年度配属
+            <%= @equipment.registered_user.last_name %>
+            <%= @equipment.registered_user.first_name %>
+            （<%= @equipment.registered_user.user_name %>）
+          </td>
         </tr>
         <tr scope="row">
           <td>データ作成日時</td>
