@@ -7,6 +7,7 @@
     <% if user_signed_in? %>
       <div class="navbar-nav mr-auto">
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-item nav-link active" %>
+        <%= link_to "アカウント編集", edit_user_registration_path, class: "nav-item nav-link active"  %>
         <%= link_to "備品データ一覧", equipments_path, class: "nav-item nav-link active" %>
         <%= link_to "貸出状況", lendings_path, class: "nav-item nav-link active" %>
         <%= link_to "貸出履歴", lendings_history_path, class: "nav-item nav-link active" %>
