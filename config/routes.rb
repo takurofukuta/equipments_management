@@ -7,4 +7,7 @@ Rails.application.routes.draw do
   get "/lendings/history", to: "lendings#lendings_history"
   get "operation_history/", to: "operation_histories#index"
   devise_for :users
+  devise_scope :user do
+    post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
+  end
 end
