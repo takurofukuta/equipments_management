@@ -52,18 +52,24 @@
 | 管理者権限機能 | 権限をもつユーザーのみ備品データの追加・編集・削除、CSVエクスポートが可能 |
 
 ## ER図・テーブル設計
-<img width="636" alt="スクリーンショット 2021-05-08 19 06 51" src="https://user-images.githubusercontent.com/76578159/117535498-05ac5c00-b031-11eb-9762-5c405a7212a1.png">
+<img width="635" alt="スクリーンショット 2021-05-08 19 27 36" src="https://user-images.githubusercontent.com/76578159/117535967-7fdde000-b033-11eb-96cb-173c456b0515.png">
 
 usersテーブル：ユーザーデータのテーブル
 | カラム名 | データ型 | 備考 |
 ----|----|---- 
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
+| user_id | integer | PK |
+| user_name | string | ユーザー名 |
+| last_name | string | 苗字 |
+| first_name | string | 名前 |
+| assignment_year | integer | 研究室配属年度 |
+| encrypted_password |  |  |
+| reset_password_token |  |  |
+| reset_password_sent_at |  |  |
+| remember_created_at |  |  |
+| created_at |  |  |
+| updated_at |  |  |
+| admin |  |  |
+
 
 
 | カラム名 | データ型 | 備考 |
