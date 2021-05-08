@@ -3,10 +3,6 @@
 研究室内の備品データの管理と、備品の貸出・返却の管理ができるアプリです。
 効率的に精度良く備品データを管理し、さらに備品の貸出状況を簡単に確認することができます。
 
-<img width="1200" alt="スクリーンショット 2021-05-08 19 21 17" src="https://user-images.githubusercontent.com/76578159/117535857-abac9600-b032-11eb-8d3c-26c04f5a8299.png">
-
-<img width="1200" alt="スクリーンショット 2021-05-08 19 21 44" src="https://user-images.githubusercontent.com/76578159/117535859-aea78680-b032-11eb-89ba-14c1494fe488.png">
-
 <img width="1200" alt="スクリーンショット 2021-05-08 19 21 03" src="https://user-images.githubusercontent.com/76578159/117535860-b1a27700-b032-11eb-8699-4c60b5f6df0e.png">
 
 ## このアプリの目的とアプリを作成した理由
