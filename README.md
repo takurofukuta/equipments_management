@@ -54,7 +54,7 @@
 ## ER図・テーブル設計
 <img width="635" alt="スクリーンショット 2021-05-08 19 27 36" src="https://user-images.githubusercontent.com/76578159/117535967-7fdde000-b033-11eb-96cb-173c456b0515.png">
 
-usersテーブル：ユーザーデータのテーブル
+usersテーブル:ユーザーデータのテーブル
 | カラム名 | データ型 | 備考 |
 ----|----|---- 
 | user_id | integer | PK |
@@ -67,9 +67,9 @@ usersテーブル：ユーザーデータのテーブル
 | remember_created_at | datetime | Remember meのチェックボックス機能用 |
 | created_at | datetime | - |
 | updated_at | datetime | - |
-| admin | boolean | 管理者権限の有無（true：有, false:無） |
+| admin | boolean | 管理者権限の有無（true:有, false:無） |
 
-equipmentsテーブル：備品データのテーブル
+equipmentsテーブル:備品データのテーブル
 | カラム名 | データ型 | 備考 |
 ----|----|---- 
 | equipment_id | integer | PK |
@@ -87,26 +87,25 @@ equipmentsテーブル：備品データのテーブル
 | updated_at | datetime | - |
 | registered_user_id | integer | 備品を登録したユーザーのid（FK） |
 
-
+lendingsテーブル:貸出した備品のテーブル
 | カラム名 | データ型 | 備考 |
 ----|----|---- 
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
+| lending_id | integer | PK |
+| lending_user_id | integer | 備品を借りたユーザーのid(FK) |
+| borrowed_equipment_id | integer | 貸出中の備品のid(FK) |
+| return_time | timestamp | 備品を返却した日時 |
+| created_at | datetime | - |
+| updated_at | datetime | - |
 
+operation_historiesテーブル:操作履歴テーブル
 | カラム名 | データ型 | 備考 |
 ----|----|---- 
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
+| operation_history_id | integer | PK |
+| content | integer | 操作内容 |
+| object | string | 操作対象 |
+| operated_user_id | integer | 操作したユーザーのid(FK) |
+| created_at | datetime | - |
+| updated_at | datetime | - |
 
 ## 工夫した点・苦労した点
 
