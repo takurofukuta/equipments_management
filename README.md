@@ -62,25 +62,30 @@ usersテーブル：ユーザーデータのテーブル
 | last_name | string | 苗字 |
 | first_name | string | 名前 |
 | assignment_year | integer | 研究室配属年度 |
-| encrypted_password |  |  |
-| reset_password_token |  |  |
-| reset_password_sent_at |  |  |
-| remember_created_at |  |  |
-| created_at |  |  |
-| updated_at |  |  |
-| admin |  |  |
+| encrypted_password | string | 暗号化されたパスワード |
+| reset_password_token | string | パスワードリセット時のトークン　|
+| remember_created_at | datetime | Remember meのチェックボックス機能用 |
+| created_at | datetime | - |
+| updated_at | datetime | - |
+| admin | boolean | 管理者権限の有無（true：有, false:無） |
 
-
-
+equipmentsテーブル：備品データのテーブル
 | カラム名 | データ型 | 備考 |
 ----|----|---- 
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
-|  |  |  |
+| equipment_id | integer | PK |
+| genre | integer | 備品ジャンル |
+| lab_equipment_name | string | 研究室用備品名 |
+| maker_name | string | メーカー名 |
+| product_name | string | 製品名 |
+| purchase_year | integer | 購入年度 |
+| asset_num | string | 資産番号 |
+| price | integer | 値段 |
+| remarks | text | 備考 |
+| lendings_status | integer | 貸出状況（0:貸出可, 1:貸出中） |
+| disposal_status | integer | 廃棄状況（0:未廃棄, 1:廃棄済） |
+| created_at | datetime | - |
+| updated_at | datetime | - |
+| registered_user_id | integer | 備品を登録したユーザーのid（FK） |
 
 
 | カラム名 | データ型 | 備考 |
