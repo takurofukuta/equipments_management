@@ -22,7 +22,7 @@
 
       <div class="field form-group">
         <%= f.label :assignment_year %><br />
-        <%= f.text_field :assignment_year, autocomplete: "assignment_year", class: "form-control" %>
+        <%= f.select :assignment_year, options_for_select((1990..Time.current.year).to_a, selected: Time.current.year), {}, class: "form-control"  %>
       </div>
       
       <div class="field form-group">
