@@ -6,24 +6,24 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <% if user_signed_in? %>
       <div class="navbar-nav mr-auto">
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-item nav-link active" %>
-        <%= link_to "アカウント編集", edit_user_registration_path, class: "nav-item nav-link active"  %>
         <%= link_to "備品データ一覧", equipments_path, class: "nav-item nav-link active" %>
         <%= link_to "貸出状況", lendings_path, class: "nav-item nav-link active" %>
         <%= link_to "貸出履歴", lendings_history_path, class: "nav-item nav-link active" %>
         <%= link_to "操作履歴", operation_history_path, class: "nav-item nav-link active" %>
       </div>
       <div class="navbar-nav">
-      <span class="navbar-text">
-        現在のアカウント:
-        <%= current_user.last_name %>
-        <%= current_user.first_name %>
-        （<%= current_user.user_name %>）
-        <% if current_user.admin? %>
-          / 管理者権限有り
-        <% else %>
-        <% end %>
-      </span>
+        <span class="navbar-text">
+          現在のアカウント:
+          <%= current_user.last_name %>
+          <%= current_user.first_name %>
+          （<%= current_user.user_name %>）
+          <% if current_user.admin? %>
+            / 管理者権限有り
+          <% else %>
+          <% end %>
+        </span>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link active" %>
+          <%= link_to "アカウント編集", edit_user_registration_path, class: "nav-link active"  %>
       </div>
     <% else %>
       <div class="navbar-nav mr-auto">
