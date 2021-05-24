@@ -1,5 +1,8 @@
 class EquipmentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :exist_equipment?, only: [:show, :edit, :update, :destroy] 
+  before_action :correct_equipment, only: [:edit, :update, :destroy]
+
   require "csv"
 
   PER_PAGE = 20
@@ -23,7 +26,6 @@ class EquipmentsController < ApplicationController
   end
 
   def edit
-    @equipment = Equipment.find(params[:id])
   end
 
   def create
@@ -40,7 +42,6 @@ class EquipmentsController < ApplicationController
   end
 
   def update
-    @equipment = Equipment.find(params[:id])
     OperationHistory.create_log(current_user.id, @equipment.lab_equipment_name, 1)
     if @equipment.update(equipment_params)
       redirect_to equipment_path(params[:id]), notice: "データを更新しました"
@@ -51,9 +52,8 @@ class EquipmentsController < ApplicationController
   end
 
   def destroy
-    equipment = Equipment.find(params[:id])
-    equipment.destroy!
-    OperationHistory.create_log(current_user.id, equipment.lab_equipment_name, 2)
+    @equipment.destroy!
+    OperationHistory.create_log(current_user.id, @equipment.lab_equipment_name, 2)
     redirect_to root_path, alert: "データを削除しました"
   end
 
@@ -74,11 +74,16 @@ class EquipmentsController < ApplicationController
     )
   end
 
+  def correct_equipment
+    redirect_to root_path, alert: "権限がありません" unless current_user.admin
+    @equipment = Equipment.find(params[:id])
+  end
+
   def send_equipments_csv(equipments)
     csv_data = CSV.generate do |csv|
       column_names = %w(備品ジャンル 研究室用備品名 メーカー名 製品名 購入年度 資産番号 値段 データ追加日 データ追加者 備考)
       csv << column_names
-      equipments.each do |equipment|
+      equipments.includes(:registered_user).each do |equipment|
         column_values = [
           equipment.genre_i18n,
           equipment.lab_equipment_name,

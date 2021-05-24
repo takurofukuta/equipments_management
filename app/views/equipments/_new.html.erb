@@ -31,7 +31,7 @@
       </div>
       <div class="field form-group">
         <%= f.label :purchase_year %>（必須）
-        <%= f.select :purchase_year, options_for_select((1990..2100).to_a), {}, class: "form-control"  %>
+        <%= f.select :purchase_year, options_for_select((1990..Time.current.year).to_a, selected: Time.current.year), {}, class: "form-control"  %>
       </div>
       <div class="field form-group">
         <%= f.label :remarks %>

@@ -21,7 +21,9 @@
       <% end %>
 
       <div class="actions">
-        <%= f.submit t('.sign_in'), class: "btn btn-primary form-control"  %>
+        <%= f.submit t('.sign_in'), class: "btn btn-primary form-control" %>
+        <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, method: :post, class: "btn btn-primary form-control mt-4" %>
+      </div>
       </div>
     <% end %>
   </div>
