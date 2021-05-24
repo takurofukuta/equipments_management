@@ -69,15 +69,7 @@
         <tr scope="row">
           <td>ステータス</td>
           <td>
-            <% if @equipment.disposal_status == 0 %>
-              <% if @equipment.lendings_status == 0 %>
-                貸出可
-              <% elsif @equipment.lendings_status == 1 %>
-                <span class="text-danger">貸出中</span>
-              <% end %>
-            <% elsif @equipment.disposal_status == 1 %>
-              <span class="text-danger">廃棄済み</span>
-            <% end %>
+            <%= equipment_status(@equipment) %>
           </td>
         </tr>
       </tbody>
