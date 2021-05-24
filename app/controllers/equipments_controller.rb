@@ -78,7 +78,7 @@ class EquipmentsController < ApplicationController
     csv_data = CSV.generate do |csv|
       column_names = %w(備品ジャンル 研究室用備品名 メーカー名 製品名 購入年度 資産番号 値段 データ追加日 データ追加者 備考)
       csv << column_names
-      equipments.each do |equipment|
+      equipments.includes(:registered_user).each do |equipment|
         column_values = [
           equipment.genre_i18n,
           equipment.lab_equipment_name,
