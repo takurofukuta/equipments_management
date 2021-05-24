@@ -1,6 +1,8 @@
 class EquipmentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :correct_equipment,only: [:edit, :update, :destroy]
+  before_action :exist_equipment?, only: [:show, :edit, :update, :destroy] 
+  before_action :correct_equipment, only: [:edit, :update, :destroy]
+
   require "csv"
 
   PER_PAGE = 20
