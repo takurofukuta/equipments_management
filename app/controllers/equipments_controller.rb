@@ -1,5 +1,6 @@
 class EquipmentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :correct_equipment,only: [:edit, :update, :destroy]
   require "csv"
 
   PER_PAGE = 20
@@ -23,7 +24,6 @@ class EquipmentsController < ApplicationController
   end
 
   def edit
-    @equipment = Equipment.find(params[:id])
   end
 
   def create
@@ -40,7 +40,6 @@ class EquipmentsController < ApplicationController
   end
 
   def update
-    @equipment = Equipment.find(params[:id])
     OperationHistory.create_log(current_user.id, @equipment.lab_equipment_name, 1)
     if @equipment.update(equipment_params)
       redirect_to equipment_path(params[:id]), notice: "データを更新しました"
@@ -51,9 +50,8 @@ class EquipmentsController < ApplicationController
   end
 
   def destroy
-    equipment = Equipment.find(params[:id])
-    equipment.destroy!
-    OperationHistory.create_log(current_user.id, equipment.lab_equipment_name, 2)
+    @equipment.destroy!
+    OperationHistory.create_log(current_user.id, @equipment.lab_equipment_name, 2)
     redirect_to root_path, alert: "データを削除しました"
   end
 
@@ -72,6 +70,11 @@ class EquipmentsController < ApplicationController
       :disposal_status,
       :remarks
     )
+  end
+
+  def correct_equipment
+    redirect_to root_path, alert: "権限がありません" unless current_user.admin
+    @equipment = Equipment.find(params[:id])
   end
 
   def send_equipments_csv(equipments)
