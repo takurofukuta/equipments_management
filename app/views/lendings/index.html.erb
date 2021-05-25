@@ -7,12 +7,12 @@
       <thead>
         <tr>
           <th scope="col" style="width:13%">備品ジャンル</th>
-          <th scope="col" style="width:18%">研究室用備品名</th>
+          <th scope="col" style="width:19%">研究室用備品名</th>
           <th scope="col" style="width:18%">製品名</th>
           <th scope="col" style="width:10%">購入年度</th>
           <th scope="col" style="width:13%">借りた人</th>
           <th scope="col" style="width:14%">貸出日</th>
-          <th scope="col" style="width:18%"></th>
+          <th scope="col" style="width:17%"></th>
         </tr>
       </thead>
       <tbody>
@@ -31,7 +31,7 @@
               <%= lending.created_at.month %>月
               <%= lending.created_at.day %>日
             </td>
-            <td class="align-middle">
+            <td class="align-middle text-left">
               <%= link_to "詳細", equipment_path(lending.borrowed_equipment), class: "btn btn-link btn-primary text-light" %>
               <% if lending.lendings_status == 0 %>
                 返却済

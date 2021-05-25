@@ -34,12 +34,12 @@
       <thead>
         <tr>
           <th scope="col" style="width:13%"><%= sort_link(@q, :genre, "備品ジャンル") %></th>
-          <th scope="col" style="width:15%"><%= sort_link(@q, :lab_equipment_name, "研究室用備品名") %></th>
+          <th scope="col" style="width:19%"><%= sort_link(@q, :lab_equipment_name, "研究室用備品名") %></th>
           <th scope="col" style="width:18%"><%= sort_link(@q, :product_name, "製品名") %></th>
           <th scope="col" style="width:10%"><%= sort_link(@q, :purchase_year, "購入年度") %></th>
           <th scope="col" style="width:12%"><%= sort_link(@q, :asset_num, "資産番号") %></th>
-          <th scope="col" style="width:12%">ステータス</th>
-          <th scope="col" style="width:20%"></th>
+          <th scope="col" style="width:10%">ステータス</th>
+          <th scope="col" style="width:18%"></th>
         </tr>
       </thead>
       <tbody>
@@ -51,29 +51,15 @@
             <td class="align-middle"><%= equipment.purchase_year %></td>
             <td class="align-middle"><%= equipment.asset_num %></td>
             <td class="align-middle">
-              <% if equipment.disposal_status == 0 %>
-                <% if equipment.lendings_status == 0 %>
-                  貸出可
-                <% elsif equipment.lendings_status == 1 %>
-                  <span class="text-danger">貸出中</span>
-                <% end %>
-              <% elsif equipment.disposal_status == 1 %>
-                <span class="text-danger">廃棄済</span>
-              <% end %>
+              <%= equipment_status(equipment) %>
             </td>
-            <td class="align-middle">
+            <td class="align-middle text-left">
+              <%= link_to "詳細", equipment_path(equipment), class: "btn btn-primary text-light" %>
               <% if current_user.admin? %>
-                <%= link_to "詳細", equipment_path(equipment), class: "btn btn-primary text-light" %>
                 <%= link_to "編集", edit_equipment_path(equipment), class: "btn btn-secondary text-light" %>
-              <% else %>
-                <%= link_to "詳細", equipment, class: "btn btn-primary text-light" %>
               <% end %>
-              <% if equipment.disposal_status == 0 %>
-                <% if equipment.lendings_status == 0 %>
-                    <%= link_to "貸出", {controller: "lendings", action: "lending", id: equipment.id}, method: :post, class: "btn btn-primary text-light" %>
-                <% elsif equipment.lendings_status == 1 %>
-                <% end %>
-              <% elsif equipment.disposal_status == 1 %>
+              <% if equipment.disposal_status == 0 && equipment.lendings_status == 0 %>
+                <%= link_to "貸出", {controller: "lendings", action: "lending", id: equipment.id}, method: :post, class: "btn btn-primary text-light" %>
               <% end %>
             </td>
           </tr>
