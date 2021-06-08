@@ -12,7 +12,7 @@ class User < ApplicationRecord
   validates :last_name, presence: true, length: { maximum: 15 }
   validates :first_name, presence: true, length: { maximum: 15 }
   validates :assignment_year, presence: true
-  validates :encrypted_password, presence: true, format: { with: VALID_USER_NAME_REGEX }
+  validates :encrypted_password, presence: true
 
   # No use email
   def email_required?
