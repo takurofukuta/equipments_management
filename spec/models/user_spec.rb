@@ -13,7 +13,7 @@ RSpec.describe User, type: :model do
       let(:user) { build(:user, user_name: "") }
       it "エラーが発生し、エラーメッセージが表示される" do
         expect(user.valid?).to eq false
-        expect(user.errors.messages).to include "を入力してください"
+        expect(user.errors.messages[:user_name]).to eq ["を入力してください", "は不正な値です"]
       end
     end
     context "" do
