@@ -23,6 +23,14 @@ RSpec.describe Equipment, type: :model do
         expect(equipment.errors.messages[:lab_equipment_name]).to include "を入力してください"
       end
     end
+    context "lab_equipment_nameがすでに存在する場合" do
+      before { create(:equipment, lab_equipment_name: "test") }
+      let(:equipment) { build(:equipment, lab_equipment_name: "test") }
+      it "エラーが発生し、エラーメッセージが表示される" do
+        expect(subject).to eq false
+        expect(equipment.errors.messages[:lab_equipment_name]).to include "はすでに存在します"
+      end
+    end
     context "maker_nameが空の場合" do
       let(:equipment) { build(:equipment, maker_name: "") }
       it "エラーが発生し、エラーメッセージが表示される" do
