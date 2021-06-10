@@ -25,9 +25,8 @@ RSpec.describe User, type: :model do
     end
     context "user_nameが半角英数字以外を含む場合" do
       let(:user1) { build(:user, user_name: "あ") }
-      let(:user2) { build(:user, user_name: "-") }
-      let(:user3) { build(:user, user_name: "a b") }
-      let(:user4) { build(:user, user_name: "aあ") }
+      let(:user2) { build(:user, user_name: "a b") }
+      let(:user3) { build(:user, user_name: "aあ") }
       it "エラーが発生し、エラーメッセージが表示される" do
         expect(user1.valid?).to eq false
         expect(user1.errors.messages[:user_name]).to include "は不正な値です"
@@ -35,8 +34,6 @@ RSpec.describe User, type: :model do
         expect(user2.errors.messages[:user_name]).to include "は不正な値です"
         expect(user3.valid?).to eq false
         expect(user3.errors.messages[:user_name]).to include "は不正な値です"
-        expect(user4.valid?).to eq false
-        expect(user4.errors.messages[:user_name]).to include "は不正な値です"
       end
     end
     context "user_nameがすでに存在する場合" do

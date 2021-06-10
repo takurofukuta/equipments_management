@@ -6,7 +6,7 @@
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="field form-group">
-        <%= f.label :user_name %><br />
+        <%= f.label :user_name %>（半角英数字、ハイフン、アンダーバーが使用可能）<br />
         <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name", class: "form-control" %>
       </div>
 
