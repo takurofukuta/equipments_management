@@ -3,5 +3,4 @@ class Lending < ApplicationRecord
   belongs_to :borrowed_equipment, class_name: "Equipment", foreign_key: :borrowed_equipment_id
   validates :lendings_status, presence: true
   validates :return_time, presence: true
-  
 end
