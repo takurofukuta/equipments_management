@@ -4,3 +4,4 @@ class Lending < ApplicationRecord
   validates :lendings_status, presence: true
   validates :return_time, presence: true
 end
+

@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :equipment do
     genre { rand(0..5) }
-    lab_equipment_name { "KJ-#{Faker::Device.manufacturer}-XXXX-XX" }
+    lab_equipment_name { "KJ-#{Faker::Device.manufacturer}-#{rand(0..100)}-#{rand(0..100)}" }
     maker_name { Faker::Device.manufacturer }
     product_name { Faker::Device.model_name }
     purchase_year { rand(1990..2020) }
