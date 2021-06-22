@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Users", type: :request do
+RSpec.describe "Sessions", type: :request do
   describe "ログイン画面のチェック" do
     context "ログイン画面の表示"
     it "成功する" do
