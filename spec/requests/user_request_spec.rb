@@ -19,5 +19,10 @@ RSpec.describe "新規登録・ログイン・ログアウト処理", type: :req
       post(user_session_path, params: { user: user })
       expect(response).to have_http_status(302)
     end
+    it "ログアウトに成功する" do
+      sign_out user
+      delete(destroy_user_session_path, params: { user: user })
+      expect(response).to have_http_status(302)
+    end
   end
 end
