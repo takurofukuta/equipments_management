@@ -9,7 +9,7 @@ RSpec.describe "備品データの処理", type: :request do
       expect(response).to have_http_status(200)
     end      
   end
-  describe "GET #create" do
+  describe "POST #create" do
     subject {post(equipments_path, params: { equipment: attributes_for(:equipment) })}
     before { sign_in user }
     context "パラメータが正常な時" do
