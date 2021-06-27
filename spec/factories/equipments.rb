@@ -5,9 +5,14 @@ FactoryBot.define do
     maker_name { Faker::Device.manufacturer }
     product_name { Faker::Device.model_name }
     purchase_year { rand(1990..2020) }
-    asset_num { "XXXX-XXXX-XXXX" }
+    asset_num { "#{rand(1000..2000)}-#{rand(1000..2000)}-#{rand(1000..2000)}" }
     price { rand(1000..500000) }
-    remarks { "test" }
+    remarks { Faker::Lorem.sentence }
     association :registered_user, factory: :user
   end
+
+  trait :invalid do
+    genre { nil }
+  end
 end
+
