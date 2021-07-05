@@ -174,4 +174,5 @@ RSpec.describe "備品データの処理", type: :request do
       expect(response).to redirect_to root_path
     end
   end
+  
 end
