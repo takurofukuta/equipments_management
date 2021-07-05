@@ -3,7 +3,7 @@ class Equipment < ApplicationRecord
   belongs_to :registered_user, class_name: "User", foreign_key: :registered_user_id
 
   validates :genre, presence: true
-  validates :lab_equipment_name, presence: true
+  validates :lab_equipment_name, presence: true, uniqueness: true
   validates :maker_name, presence: true
   validates :product_name, presence: true
   validates :purchase_year, presence: true

@@ -6,7 +6,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :authentication_keys => [:user_name]
 
-  validates :user_name, uniqueness: true
+  VALID_USER_NAME_REGEX = /\A[a-zA-Z0-9\-_]+\z/.freeze
+
+  validates :user_name, presence: true, uniqueness: true, length: { maximum: 30 }, format: { with: VALID_USER_NAME_REGEX }
+  validates :last_name, presence: true, length: { maximum: 15 }
+  validates :first_name, presence: true, length: { maximum: 15 }
+  validates :assignment_year, presence: true
+  validates :encrypted_password, presence: true
 
   # No use email
   def email_required?
